@@ -5,7 +5,7 @@ using PMS.Entities;
 
 namespace PMS.Controllers
 {
-    public class UserController : ControllerBase
+    public class UserController : ApiBaseController
     {
         private readonly PMSDbContext _context;
         public UserController(PMSDbContext context)
