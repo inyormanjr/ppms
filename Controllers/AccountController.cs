@@ -2,25 +2,29 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PMS.Base;
 using PMS.Data;
 using PMS.DTO;
 using PMS.Entities;
+using PMS.interfaces;
 
 namespace PMS.Controllers
 {
     public class AccountController : ApiBaseController
     {
         private readonly PMSDbContext __context;
-        public AccountController(PMSDbContext _context)
+        private readonly ITokenService tokenService;
+
+        public AccountController(PMSDbContext _context, ITokenService  tokenService)
         {
             this.__context = _context;
-
+            this.tokenService = tokenService;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<AppUser>> Register(RegisterDTO registerDTO) {
+        public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO) {
 
-            if(await UserExist(registerDTO.Username)) return  new BadRequestResult() {};
+            if(await UserExist(registerDTO.Username)) return  new BadRequestResult();
             using var hmac = new HMACSHA512();
 
             var user = new AppUser()
@@ -32,20 +36,27 @@ namespace PMS.Controllers
             __context.Users.Add(user);
             await __context.SaveChangesAsync();
 
-            return user;
+            return new UserDTO {
+                Username = user.UserName,
+                Token = tokenService.CreateToken(user)
+            };
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<AppUser>> Login(LoginDTO loginDTO) {
+        public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO) {
             var user = await __context.Users.SingleOrDefaultAsync(x => x.UserName == loginDTO.Username);
-            if(user == null) return new UnauthorizedResult();
+            if(user == null) return new UnAuthorized("User not found.");
             using var hmac = new HMACSHA512(user.PasswordSalt);
             var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDTO.Password));
             for (int i = 0; i < computeHash.Length; i++)
             {
-                if(computeHash[i] == user.PasswordHash[i]) return new UnauthorizedResult();
+                if(computeHash[i] != user.PasswordHash[i]) return new UnAuthorized("Incorrect password");
             }
-            return user;
+             return new UserDTO
+            {
+                Username = user.UserName,
+                Token = tokenService.CreateToken(user)
+            }; ;
         }
 
         private async Task<bool> UserExist(string username) {

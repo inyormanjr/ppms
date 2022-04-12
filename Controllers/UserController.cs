@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PMS.Data;
@@ -15,13 +16,18 @@ namespace PMS.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers() {
             return await _context.Users.ToListAsync();
-            
         }
+
+        
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<AppUser>> GetUserById(int id) {
-            return await _context.Users.FindAsync(id);
+            var result = await _context.Users.FindAsync(id);
+            if(result == null) return new BadRequestResult();
+            return result;
         }
     }
 }
