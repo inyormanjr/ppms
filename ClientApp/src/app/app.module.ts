@@ -27,7 +27,6 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
       {
         path: 'login',
         loadChildren: () =>
@@ -38,6 +37,7 @@ import { environment } from '../environments/environment';
         loadChildren: () =>
           import('./main/main.module').then((x) => x.MainModule),
       },
+      {path: '', redirectTo: 'home', pathMatch: 'full'}
     ]),
 
     StoreModule.forRoot({}),

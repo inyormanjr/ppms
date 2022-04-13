@@ -1,11 +1,11 @@
-namespace PMS.Entities.EskeysEntities
+namespace PMS.DTO
 {
-    public class EskeyReceivable
+    public class EskeyReceivableCreateDTO
     {
+
         public int Id { get; set; }
         public int Count { get; set; }
         public DateTime ArrivalDateTime { get; set; }
         public int CollectorId { get; set; }
-        public AppUser? Collector { get; set; }
     }
 }

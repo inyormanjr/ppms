@@ -38,7 +38,8 @@ namespace PMS.Controllers
 
             return new UserDTO {
                 Username = user.UserName,
-                Token = tokenService.CreateToken(user)
+                Token = tokenService.CreateToken(user),
+                Role = user.Role.ToString()
             };
         }
 
@@ -55,7 +56,8 @@ namespace PMS.Controllers
              return new UserDTO
             {
                 Username = user.UserName,
-                Token = tokenService.CreateToken(user)
+                Token = tokenService.CreateToken(user),
+                Role = user.Role.ToString()
             }; ;
         }
 

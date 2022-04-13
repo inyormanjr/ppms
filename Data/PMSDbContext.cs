@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PMS.Entities;
+using PMS.Entities.EskeysEntities;
 using PMS.FluentApiMapping;
 
 namespace PMS.Data
@@ -10,6 +11,8 @@ namespace PMS.Data
         {
         }
 
+        public DbSet<AppUser>? Users { get; set; }
+        public DbSet<EskeyReceivable> EskeyReceivable { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -18,7 +21,6 @@ namespace PMS.Data
         }
 
 
-        public DbSet<AppUser>? Users { get; set; }
 
     }
 }
