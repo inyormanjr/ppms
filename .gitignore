@@ -232,3 +232,4 @@ _Pvt_Extensions
 
 appsettings.json
 appsettings.Development.json
+ClientApp/.angular/cache/

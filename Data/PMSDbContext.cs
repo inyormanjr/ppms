@@ -5,9 +5,11 @@ namespace PMS.Data
 {
     public class PMSDbContext : DbContext
     {
-       
+        public PMSDbContext(DbContextOptions options) : base(options)
+        {
+        }
 
-        public DbSet<AppUser> Users { get; set; }
+        public DbSet<AppUser>? Users { get; set; }
 
     }
 }

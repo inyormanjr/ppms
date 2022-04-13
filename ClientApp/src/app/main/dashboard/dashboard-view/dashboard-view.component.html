@@ -1,0 +1,42 @@
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Recent Activity</button>
+    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+  </div>
+</nav>
+<div class="tab-content pt-5 pb-3" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="container-fluid">
+      <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+              <div class="card h-100" style="max-height: 800px; height: 800px;">
+                <div class="card-body">
+                  <h5 class="card-title">Announcements</h5>
+                 <ul class="list-group">
+                   <li class="list-group-item">Test announcements</li>
+                   <li class="list-group-item">Dapibus ac facilisis in</li>
+                   <li class="list-group-item">Morbi leo risus</li>
+                 </ul>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+              </div>
+            </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-12 mb-1">
+            <app-eskeys-received-table-card></app-eskeys-received-table-card>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-12 mb-1">
+            <app-eskeys-incoming-table-card></app-eskeys-incoming-table-card>
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...2</div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...3</div>
+</div>
