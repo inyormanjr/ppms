@@ -3,6 +3,7 @@ namespace PMS.Entities
     public enum Roles:byte
     {
         Admin = 0,
-        Staff = 1
+        Collector = 1,
+        Staff = 2
     }
 }

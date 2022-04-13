@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PMS.Entities;
+using PMS.FluentApiMapping;
 
 namespace PMS.Data
 {
@@ -8,6 +9,14 @@ namespace PMS.Data
         public PMSDbContext(DbContextOptions options) : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new EskeyReceivableMap());
+            
+        }
+
 
         public DbSet<AppUser>? Users { get; set; }
 
