@@ -16,6 +16,9 @@ export const loadAppsFailure = createAction(
   props<{ error: any }>()
 );
 
-export const login = createAction('[Login Page] User Login', props<{ user: User }>());
+export const login = createAction('[Login Page] User Login', props<{ username: string, password: string }>());
+
+export const loginSuccess = createAction('[Login Page] User Login Successful', props<{ user: User }>());
+export const loginFailure = createAction('[Login Page] Login Failure', props<{message: any}>());
 
 export const logout = createAction('[Navbar Component] User LogOut');

@@ -39,7 +39,7 @@ namespace PMS.Controllers
 
         [HttpPut("Update/{id}")]
         [Authorize]
-        public async Task<ActionResult<EskeyReceivableCreateDTO>> UpateEskeyReceivable(int id, EskeyReceivableCreateDTO eskeyReceivableCreateDTO) {
+        public async Task<ActionResult<EskeyReceivableCreateDTO>> UpdateEskeyReceivable(int id, EskeyReceivableCreateDTO eskeyReceivableCreateDTO) {
             var mapped = _mapper.Map<EskeyReceivable>(eskeyReceivableCreateDTO);
             var result = await this._eskeyReceivableService.Update(id, mapped);
             return _mapper.Map<EskeyReceivableCreateDTO>(result);

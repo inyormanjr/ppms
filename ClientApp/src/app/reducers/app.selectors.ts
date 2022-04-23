@@ -7,3 +7,5 @@ export const selectAppFeature = createFeatureSelector<AppRootState>(appRootKey);
 
 
 export const selectUser = createSelector(selectAppFeature, app => app.user);
+
+export const selectAppIsLoaidng = createSelector(selectAppFeature, app => app.isLoading);

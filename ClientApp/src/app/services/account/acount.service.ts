@@ -2,7 +2,7 @@ import { AppActions } from 'src/app/reducers/app.action.types';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 import { AppRootState } from 'src/app/reducers';
@@ -20,19 +20,14 @@ export class AcountService {
     private appStore: Store<AppRootState>
   ) {}
 
-  login(username: string, password: string) {
+  login(username: string, password: string): Observable<User> {
     return this.httpClient
       .post<User>(this.baseURL + 'login', { username, password })
       .pipe(
         map((response: User) => {
           const user = response;
-          if (user) {
-            this.appStore.dispatch(AppActions.login({ user }));
             localStorage.setItem('user', JSON.stringify(user));
-            return true;
-          } else {
-            return undefined;
-          }
+            return user;
         })
       );
   }
