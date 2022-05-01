@@ -23,12 +23,12 @@ namespace PMS.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<List<EskeyReceivable>>> GetEskeysReceivables(int skip, int take)
+        public async Task<ActionResult<List<EskeyReceivable>>> GetEskeysReceivables(int skip, int take = 10)
         {
             var ret = await _eskeyReceivableService.GetMany(skip, take);
             return ret;
         }
-        [HttpPost("Create")]
+        [HttpPost]
         [Authorize]
         public async Task<ActionResult<EskeyReceivableCreateDTO>> CreateNewEskeyReceivables(EskeyReceivableCreateDTO eskeyReceivableDTO)
         {
