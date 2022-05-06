@@ -1,24 +1,25 @@
 <div class="card h-100">
   <div class="card-body">
     <h5 class="card-title">Incoming Eskeys</h5>
-    <div class="table-responsive" style="height: 300px; max-height: 300px; overflow-y: auto;">
+    <div class="table-responsive">
       <table class="table mt-3 text-center">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">Loc</th>
             <th scope="col">Count</th>
             <th scope="col">Arrival DateTime</th>
-            <th scope="col">Location</th>
-
+            <th class="text-end">Action</th>
 
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of incomingEskeys">
-            <th scope="row">{{item.id}}</th>
+            <th scope="row">{{item.location}}</th>
             <td>{{item.count}}</td>
             <td>{{item.arrivalDateTime | date}}</td>
-            <td>{{item.location}}</td>
+            <td class="text-end">
+              <button type="button" class="btn btn-outline-danger">Receive</button>
+            </td>
           </tr>
         </tbody>
       </table>

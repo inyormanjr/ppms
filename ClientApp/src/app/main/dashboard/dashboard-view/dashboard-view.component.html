@@ -12,11 +12,32 @@
             <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
               <div class="card h-100" style="max-height: 800px; height: 800px;">
                 <div class="card-body">
-                  <h5 class="card-title">Announcements</h5>
+                  <h5 class="card-title">Activities</h5>
                  <ul class="list-group">
-                   <li class="list-group-item">Test announcements</li>
-                   <li class="list-group-item">Dapibus ac facilisis in</li>
-                   <li class="list-group-item">Morbi leo risus</li>
+                   <li class="list-group-item d-flex justify-content-between">
+                     <span class="">(<b>ClientCare</b>) Recollection Required</span>
+                     <span class="text-muted">20-15-2022 9:55pm</span>
+                   </li>
+                   <li class="list-group-item d-flex justify-content-between">
+                    <span class="">(<b>SRA</b>) VIC Batches</span>
+                    <span class="text-muted">20-15-2022 10:55pm</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between">
+                    <span class="">(<b>Mel-SRA</b>) URGENT BATCH 3 SAVED</span>
+                    <span class="text-muted">20-15-2022 12:55pm</span>
+                  </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                      <span class="">(<b>Mel-SRA</b>) URGENT BATCH 4 SAVED</span>
+                      <span class="text-muted">20-15-2022 12:55pm</span>
+                    </li>
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="">(<b>Mel-SRA</b>) URGENT BATCH 5 SAVED</span>
+                        <span class="text-muted">20-15-2022 12:55pm</span>
+                      </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                          <span class="">(<b>Mel-SRA</b>) URGENT BATCH 6 SAVED</span>
+                          <span class="text-muted">20-15-2022 12:55pm</span>
+                        </li>
                  </ul>
                 </div>
                 <div class="card-footer">
@@ -30,7 +51,7 @@
             <app-eskeys-received-table-card></app-eskeys-received-table-card>
           </div>
           <div class="col-md-6 col-lg-6 col-sm-12 mb-1">
-            <app-eskeys-incoming-table-card></app-eskeys-incoming-table-card>
+            <app-eskeys-incoming-table-card *ngIf="incomingEskey$ | async as incomingEskeys"  [incomingEskeys]="incomingEskeys"></app-eskeys-incoming-table-card>
           </div>
 
       </div>

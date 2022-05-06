@@ -9,7 +9,8 @@ namespace PMS.FluentApiMapping
         public void Configure(EntityTypeBuilder<EskeyReceivable> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.HasOne(x => x.Collector).WithMany().HasForeignKey(y => y.CollectorId);
+            builder.HasOne(x => x.Operator).WithMany().HasForeignKey(y => y.OperatorId);
+            builder.HasMany(x => x.EskeyReceivableDetails).WithOne(x => x.EskeyReceivable).HasForeignKey(x => x.EskeyReceivableId);
         }
     }
 }

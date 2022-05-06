@@ -4,6 +4,12 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.link-active {
+  font-weight: 700;
+  border-bottom: 5px solid white;
+  border-radius: 5px;
+}
+
 html {
   font-size: 14px;
 }

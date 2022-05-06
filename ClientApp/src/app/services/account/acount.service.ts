@@ -32,6 +32,16 @@ export class AcountService {
       );
   }
 
+  getToken()  {
+     var u = localStorage.getItem('user');
+    if (u) {
+      const user: User = JSON.parse(u);
+      return user.token;
+    } else {
+      return undefined;
+    }
+  }
+
   logOut() {
     localStorage.removeItem('user');
     this.appStore.dispatch(AppActions.logout());

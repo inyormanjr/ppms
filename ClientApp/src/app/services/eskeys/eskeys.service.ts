@@ -4,6 +4,7 @@ import { IBaseService } from './../ibase-service';
 import { BaseService } from './../base.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EskeyReceivable } from 'src/app/models/receivablesAgg/eskeyReceivable';
 
 @Injectable({
   providedIn: 'root'

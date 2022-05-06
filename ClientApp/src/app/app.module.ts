@@ -1,8 +1,10 @@
+import { AuthInterceptor } from './_interceptor/auth.interceptor';
+import { ErrorInterceptor } from './_interceptor/error.interceptor';
 import { appReducer, appRootKey } from './reducers/index';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -12,10 +14,15 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './reducers/app.effects';
 
+export function tokenGetter() {
+  const token = localStorage.getItem('token');
+  return token;
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +35,13 @@ import { AppEffects } from './reducers/app.effects';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: ['https://localhost:7283/api/'],
+        disallowedRoutes: ['https://localhost:7283/'],
+      },
+    }),
     RouterModule.forRoot([
       {
         path: 'login',
@@ -39,11 +53,11 @@ import { AppEffects } from './reducers/app.effects';
         loadChildren: () =>
           import('./main/main.module').then((x) => x.MainModule),
       },
-      {path: '', redirectTo: 'home', pathMatch: 'full'}
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
     ]),
 
     StoreModule.forRoot({}),
-    StoreModule.forFeature(appRootKey,appReducer),
+    StoreModule.forFeature(appRootKey, appReducer),
     !environment.production
       ? StoreDevtoolsModule.instrument({
           maxAge: 25,
@@ -53,7 +67,10 @@ import { AppEffects } from './reducers/app.effects';
     EffectsModule.forRoot(),
     EffectsModule.forFeature([AppEffects]),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
