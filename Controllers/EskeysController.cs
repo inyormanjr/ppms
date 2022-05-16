@@ -1,22 +1,24 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PMS.Data;
 using PMS.DTO;
 using PMS.Entities.EskeysEntities;
 using PMS.interfaces;
-using PMS.services;
-
+using System.Web;
 namespace PMS.Controllers
 {
     public class EskeysController : ApiBaseController
     {
         private readonly IEskeyReceivableService _eskeyReceivableService;
         private readonly IMapper _mapper;
-        public EskeysController(IEskeyReceivableService eskeyReceivableService, IMapper mapper)
+        private readonly ITokenService tokenService;
+        private readonly IAccountService _accountService;
+
+        public EskeysController(IEskeyReceivableService eskeyReceivableService, IMapper mapper, ITokenService tokenService, IAccountService accountService)
         {
+            this._accountService = accountService;
             this._mapper = mapper;
+            this.tokenService = tokenService;
             this._eskeyReceivableService = eskeyReceivableService;
         }
 
@@ -30,16 +32,18 @@ namespace PMS.Controllers
         }
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<EskeyReceivableCreateDTO>> CreateNewEskeyReceivables(EskeyReceivableCreateDTO eskeyReceivableDTO)
+        public async Task<ActionResult<EskeyReceivableCreateDTO>> CreateNewEskeyReceivables( EskeyReceivableCreateDTO eskeyReceivableDTO)
         {
             var mapped = _mapper.Map<EskeyReceivable>(eskeyReceivableDTO);
-             var result =  await this._eskeyReceivableService.Add(mapped);
-             return _mapper.Map<EskeyReceivableCreateDTO>(result);
+        
+            var result = await this._eskeyReceivableService.Add(mapped);
+            return _mapper.Map<EskeyReceivableCreateDTO>(result);
         }
 
         [HttpPut("Update/{id}")]
         [Authorize]
-        public async Task<ActionResult<EskeyReceivableCreateDTO>> UpdateEskeyReceivable(int id, EskeyReceivableCreateDTO eskeyReceivableCreateDTO) {
+        public async Task<ActionResult<EskeyReceivableCreateDTO>> UpdateEskeyReceivable(int id, EskeyReceivableCreateDTO eskeyReceivableCreateDTO)
+        {
             var mapped = _mapper.Map<EskeyReceivable>(eskeyReceivableCreateDTO);
             var result = await this._eskeyReceivableService.Update(id, mapped);
             return _mapper.Map<EskeyReceivableCreateDTO>(result);

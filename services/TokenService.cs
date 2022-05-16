@@ -20,12 +20,17 @@ namespace PMS.services
         {
             var claims = new List<Claim>()
             {
+                new Claim(JwtRegisteredClaimNames.Sid, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.NameId, user.UserName),
                 new Claim("Role", user.Role.ToString())
         };
+
+            var claimsIdentity = new ClaimsIdentity(claims);
+            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+            
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
             var tokenDescriptor = new SecurityTokenDescriptor { 
-                Subject = new ClaimsIdentity(claims),
+                Subject = claimsIdentity,
                 Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = creds,
             };
@@ -33,6 +38,12 @@ namespace PMS.services
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public string currenUserId(string _token)
+        {
+            
+            return "";
         }
     }
 }

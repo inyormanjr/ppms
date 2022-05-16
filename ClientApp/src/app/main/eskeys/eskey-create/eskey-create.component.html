@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="" >
+        <button type="button" class="btn btn-danger" [routerLink]="['../']">Back</button>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <h3 class="mt-3">Eskey Delivery Entry Form</h3>
+  <form [formGroup]="eskeyReceivableForm" class="row g-3 mt-3">
+    <div class="col-md-6">
+      <label for="dateProcessed" class="form-label">Date Processed</label>
+      <input formControlName="dateProcessed" type="date" class="form-control" id="dateProcessed">
+    </div>
+    <div class="col-md-6">
+      <label for="arrivalDate" class="form-label">Date Arrival</label>
+      <input type="date" formControlName="arrivalDateTime" class="form-control" id="arrivalDate">
+    </div>
+    <div class="col-md-4">
+      <label for="inputState" class="form-label">Location</label>
+      <select id="inputState" formControlName="location" class="form-select">
+        <option selected>Choose...</option>
+        <option>QLD</option>
+        <option>MEL</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="charter" class="form-label">Charter</label>
+      <input type="text" formControlName="charter" class="form-control" id="charter" placeholder="charter">
+    </div>
+    <div class="col-md-4">
+      <label for="count" class="form-label">No. Of Eskeys</label>
+      <input  type="number" formControlName="count" class="form-control" [value]="1" id="count">
+    </div>
+    <div class="col-md-2">
+      <button [hidden]="disableGenerate" type="submit" (click)="generateEskeyReceivableDetails()" class="btn btn-primary">Generate Eskey Details</button>
+    </div>
+    <div class="col-md-12 border-bottom mb-4">
+      <h4 class="mt-5">Eskey Details</h4>
+    </div>
+    <div class="container-fluid">
+          <div *ngFor="let item of this.eskeyReceivableForm.controls.eskeyReceivableDetails.value" class="row mb-3 p-3 border">
+            <div class="col-md-3">
+              <label for="eskeyNo" class="form-label">Eskey No</label>
+              <input type="number" class="form-control" [value]="1" id="eskeyNo">
+            </div>
+            <div class="col-md-5">
+              <label for="description" class="form-label">Description</label>
+              <input type="text" class="form-control" id="description">
+            </div>
+            <div class="col-md-2">
+              <label for="temp" class="form-label">Temp</label>
+              <input type="text" class="form-control" id="temp">
+            </div>
+            <div class="col-md-2">
+              <label for="initials" class="form-label">Initials</label>
+              <input type="text" class="form-control" id="initials">
+            </div>
+          </div>
+    </div>
+
+    <div class="col-md-12 border-top p-2 mt-5 d-flex justify-content-between">
+        <button [disabled]="!disableGenerate" (click)="addOneEskeyReceivableDetail()" type="button" class="btn btn-danger me-2">Add Eskey Detail</button>
+        <button  type="button" (click)="createEskey()" class="btn btn-success">Create</button>
+    </div>
+  </form>
+</div>

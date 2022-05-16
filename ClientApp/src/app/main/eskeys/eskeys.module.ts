@@ -1,4 +1,6 @@
-import { EskeysIncomingTableCardComponent } from './../dashboard/components/eskeys-incoming-table-card/eskeys-incoming-table-card.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 import { StoreModule } from '@ngrx/store';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -8,16 +10,20 @@ import { EffectsModule } from '@ngrx/effects';
 import { EskeyEffects } from './reducer/effects/eskey.effects';
 import { eskeysReducer } from './reducer/eskeys.reducer';
 import { EskeysReceivablesTableComponent } from './components/eskeys-receivables-table/eskeys-receivables-table.component';
+import { EskeyCreateComponent } from './eskey-create/eskey-create.component';
 
-const router: Routes = [{path: '', component: EskeysViewComponent}];
+const router: Routes = [{path: '', component: EskeysViewComponent}, {path:'create', component: EskeyCreateComponent}];
 
 @NgModule({
   declarations: [
     EskeysViewComponent,
     EskeysReceivablesTableComponent,
+    EskeyCreateComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(router),
     StoreModule.forFeature('eskeys', eskeysReducer),
     EffectsModule.forFeature([EskeyEffects])

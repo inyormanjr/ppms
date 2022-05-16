@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EskeysService } from './../services/eskeys/eskeys.service';
 import { Router, Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -19,6 +20,7 @@ const routes: Routes = [{
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature(fromMain.mainFeatureKey, fromMain.reducers, { metaReducers: fromMain.metaReducers })
   ],

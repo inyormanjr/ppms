@@ -1,3 +1,5 @@
+using PMS.Entities.EskeysEntities;
+
 namespace PMS.DTO
 {
     public class EskeyReceivableCreateDTO
@@ -5,7 +7,12 @@ namespace PMS.DTO
 
         public int Id { get; set; }
         public int Count { get; set; }
+        public string location { get; set; } = String.Empty;
+        public DateTime DateProcessed { get; set; }
         public DateTime ArrivalDateTime { get; set; }
-        public int CollectorId { get; set; }
+        public DateTime DateTimeReceived { get; set; }
+        public int OperatorId { get; set; }
+        public string Charter { get; set; } = String.Empty;
+        public List<EskeyReceivableDetail> EskeyReceivableDetails { get; set; } = new List<EskeyReceivableDetail>();
     }
 }
