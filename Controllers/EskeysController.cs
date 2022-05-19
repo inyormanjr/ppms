@@ -34,6 +34,16 @@ namespace PMS.Controllers
             var ret = await _eskeyReceivableService.GetMany(skip, take);
             return ret;
         }
+
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<ActionResult<EskeyReceivableCreateDTO>> GetEskeysReceivablesId(int id)
+        {
+            var ret = await _eskeyReceivableService.GetById(id);
+            return _mapper.Map<EskeyReceivableCreateDTO>(ret);
+        }
+
+
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<EskeyReceivableCreateDTO>> CreateNewEskeyReceivables(EskeyReceivableCreateDTO eskeyReceivableDTO)

@@ -4,4 +4,5 @@ export interface EskeyReceivableDetail {
   description: string;
   temp: string;
   initials: string;
+  checked: boolean;
 }

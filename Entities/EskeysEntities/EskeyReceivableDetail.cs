@@ -8,6 +8,7 @@ namespace PMS.Entities.EskeysEntities
         public string Temp { get; set; } = "N/A";
         public string Initials { get; set; } = String.Empty;
         public int EskeyReceivableId { get; set; }
+        public bool Checked { get; set; } 
         public EskeyReceivable EskeyReceivable { get; set; } = new EskeyReceivable();
 
     }

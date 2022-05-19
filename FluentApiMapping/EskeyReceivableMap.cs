@@ -10,7 +10,8 @@ namespace PMS.FluentApiMapping
         {
             builder.HasKey(x => x.Id);
             builder.HasOne(x => x.Operator).WithMany().HasForeignKey(y => y.OperatorId);
-            builder.HasMany(x => x.EskeyReceivableDetails).WithOne(x => x.EskeyReceivable).HasForeignKey(x => x.EskeyReceivableId);
+            builder.HasMany(x => x.EskeyReceivableDetails).WithOne(x => x.EskeyReceivable).HasForeignKey(x => x.EskeyReceivableId).OnDelete(DeleteBehavior.ClientCascade);
+           
         }
     }
 }

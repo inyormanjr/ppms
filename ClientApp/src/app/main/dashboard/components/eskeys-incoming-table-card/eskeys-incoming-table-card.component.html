@@ -1,28 +1,37 @@
 <div class="card h-100">
-  <div class="card-body">
+  <div class="card-body d-flex flex-column">
     <h5 class="card-title">Incoming Eskeys</h5>
-    <div class="table-responsive" style="height: 300px; max-height: 300px; overflow-y: auto;">
-      <table class="table mt-3 text-center">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Count</th>
-            <th scope="col">Arrival DateTime</th>
-            <th scope="col">Location</th>
+    <ng-container *ngIf="incomingEskeys.length > 0; else elseTemplate">
+          <div class="table-responsive" style="height: 300px; max-height: 300px; overflow-y: auto;">
+            <table class="table mt-3 text-center">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Count</th>
+                  <th scope="col">Arrival DateTime</th>
+                  <th scope="col">Location</th>
 
 
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of incomingEskeys">
-            <th scope="row">{{item.id}}</th>
-            <td>{{item.count}}</td>
-            <td>{{item.arrivalDateTime | date}}</td>
-            <td>{{item.location}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of incomingEskeys">
+                  <th scope="row">{{item.id}}</th>
+                  <td>{{item.count}}</td>
+                  <td>{{item.arrivalDateTime | date}}</td>
+                  <td>{{item.location}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </ng-container>
+    <ng-template #elseTemplate >
+      <div class="row h-100 justify-content-center align-items-center  text-center">
+        <h4 class="align-self-center">No Data</h4>
+      </div>
+
+    </ng-template>
   </div>
   <div class="card-footer">
     <small class="text-muted">Last updated 3 mins ago</small>
