@@ -11,7 +11,7 @@ namespace PMS.Data
         {
         }
 
-        public DbSet<AppUser>? Users { get; set; }
+        public DbSet<AppUser> Users { get; set; }
         public DbSet<EskeyReceivable> EskeyReceivable { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

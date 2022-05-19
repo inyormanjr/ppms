@@ -1,9 +1,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PMS.DTO;
+using PMS.Entities;
 using PMS.Entities.EskeysEntities;
 using PMS.interfaces;
+using System.Security.Claims;
 using System.Web;
 namespace PMS.Controllers
 {
@@ -14,7 +17,8 @@ namespace PMS.Controllers
         private readonly ITokenService tokenService;
         private readonly IAccountService _accountService;
 
-        public EskeysController(IEskeyReceivableService eskeyReceivableService, IMapper mapper, ITokenService tokenService, IAccountService accountService)
+        public EskeysController(IEskeyReceivableService eskeyReceivableService, IMapper mapper, ITokenService tokenService,
+        IAccountService accountService)
         {
             this._accountService = accountService;
             this._mapper = mapper;
@@ -32,10 +36,11 @@ namespace PMS.Controllers
         }
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<EskeyReceivableCreateDTO>> CreateNewEskeyReceivables( EskeyReceivableCreateDTO eskeyReceivableDTO)
+        public async Task<ActionResult<EskeyReceivableCreateDTO>> CreateNewEskeyReceivables(EskeyReceivableCreateDTO eskeyReceivableDTO)
         {
             var mapped = _mapper.Map<EskeyReceivable>(eskeyReceivableDTO);
-        
+            var userId = this.User.Claims.FirstOrDefault().Value;
+            mapped.OperatorId = int.Parse(userId.ToString());
             var result = await this._eskeyReceivableService.Add(mapped);
             return _mapper.Map<EskeyReceivableCreateDTO>(result);
         }

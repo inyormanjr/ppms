@@ -10,11 +10,11 @@
   <form [formGroup]="eskeyReceivableForm" class="row g-3 mt-3">
     <div class="col-md-6">
       <label for="dateProcessed" class="form-label">Date Processed</label>
-      <input formControlName="dateProcessed" type="date" class="form-control" id="dateProcessed">
+      <input formControlName="dateProcessed" type="date" min="1997-01-01" max="3030-12-31" class="form-control" id="dateProcessed">
     </div>
     <div class="col-md-6">
       <label for="arrivalDate" class="form-label">Date Arrival</label>
-      <input type="date" formControlName="arrivalDateTime" class="form-control" id="arrivalDate">
+      <input type="date" formControlName="arrivalDateTime" min="1997-01-01" max="2030-12-31" class="form-control" id="arrivalDate">
     </div>
     <div class="col-md-4">
       <label for="inputState" class="form-label">Location</label>
@@ -38,30 +38,33 @@
     <div class="col-md-12 border-bottom mb-4">
       <h4 class="mt-5">Eskey Details</h4>
     </div>
-    <div class="container-fluid">
-          <div *ngFor="let item of this.eskeyReceivableForm.controls.eskeyReceivableDetails.value" class="row mb-3 p-3 border">
+    <div class="container-fluid" formArrayName="eskeyReceivableDetails">
+          <div  *ngFor="let item of this.eskeyReceivableForm.controls.eskeyReceivableDetails.value; let eskeyIndex= index; trackBy: trackByFn"
+         [formGroupName]="eskeyIndex"
+
+          class="row mb-3 p-3 border">
             <div class="col-md-3">
               <label for="eskeyNo" class="form-label">Eskey No</label>
-              <input type="number" class="form-control" [value]="1" id="eskeyNo">
+              <input type="number" formControlName="eskeyNo" class="form-control" [value]="1" id="eskeyNo">
             </div>
             <div class="col-md-5">
               <label for="description" class="form-label">Description</label>
-              <input type="text" class="form-control" id="description">
+              <input type="text" formControlName="description" class="form-control" id="description">
             </div>
             <div class="col-md-2">
               <label for="temp" class="form-label">Temp</label>
-              <input type="text" class="form-control" id="temp">
+              <input type="text" formControlName="temp" class="form-control" id="temp">
             </div>
             <div class="col-md-2">
               <label for="initials" class="form-label">Initials</label>
-              <input type="text" class="form-control" id="initials">
+              <input  type="text" formControlName="initials" class="form-control" id="initials">
             </div>
           </div>
     </div>
 
     <div class="col-md-12 border-top p-2 mt-5 d-flex justify-content-between">
         <button [disabled]="!disableGenerate" (click)="addOneEskeyReceivableDetail()" type="button" class="btn btn-danger me-2">Add Eskey Detail</button>
-        <button  type="button" (click)="createEskey()" class="btn btn-success">Create</button>
+        <button [disabled]="this.eskeyReceivableForm.controls.eskeyReceivableDetails.value.length == 0" type="button" (click)="createEskey()" class="btn btn-success">Create</button>
     </div>
   </form>
 </div>

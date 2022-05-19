@@ -3,10 +3,10 @@ export interface EskeyReceivable {
   id: number;
   count: number;
   location: string;
-  arrivalDateTime: Date;
+  arrivalDateTime: string;
   operatorId: number;
-  dateProcessed: Date;
-  dateTimeReceived: Date;
+  dateProcessed: string;
+  dateTimeReceived: string;
   charter: string;
   eskeyReceivableDetails: EskeyReceivableDetail[];
 }

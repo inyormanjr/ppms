@@ -4,7 +4,7 @@ namespace PMS.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ApiBaseController
+    public class ApiBaseController: ControllerBase
     {
         
     }

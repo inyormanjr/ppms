@@ -28,11 +28,11 @@ export class EskeysService extends BaseService implements IBaseService<EskeyRece
       .pipe(map((response: EskeyReceivable) => response));
   }
   Create(t: EskeyReceivable): Observable<EskeyReceivable> {
-    return this.httpClient.post<EskeyReceivable>(this.baseURL, { t })
+    return this.httpClient.post<EskeyReceivable>(this.baseURL,  t )
       .pipe(map((response: EskeyReceivable) => response));
   }
   Update(id: number, t: EskeyReceivable): Observable<any> {
-    return this.httpClient.put<EskeyReceivable>(this.baseURL + id, { t })
+    return this.httpClient.put<EskeyReceivable>(this.baseURL + id,  t )
       .pipe(map((response: EskeyReceivable) => response));
   }
   Delete(id: number): Observable<any> {
