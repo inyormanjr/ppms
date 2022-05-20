@@ -12,6 +12,7 @@ namespace PMS.Helpers
             CreateMap<AppUser, UserDTO>().ReverseMap();
             CreateMap<EskeyReceivableCreateDTO, EskeyReceivable>().ReverseMap();
             CreateMap<EskeyReceivableDetailCreateDTO, EskeyReceivableDetail>().ReverseMap();
+            CreateMap<EskeyReceivableViewDTO, EskeyReceivable>().ReverseMap();
         }
     }
 }

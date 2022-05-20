@@ -34,6 +34,16 @@ namespace PMS.services
             return await __dbContext.EskeyReceivable.Where(x=> x.Id == id).Include(x=> x.EskeyReceivableDetails).FirstOrDefaultAsync();
         }
 
+        public async Task<List<EskeyReceivable>> GetEskeyDeliveryReceivable(int skip, int take)
+        {
+            return await this.__dbContext.EskeyReceivable.Where(x => x.DateTimeReceived == null).OrderByDescending(x => x.Id).Skip(skip).Take(take).ToListAsync();
+        }
+
+        public async Task<List<EskeyReceivable>> GetEskeyDeliveryReceived(int skip, int take)
+        {
+            return await this.__dbContext.EskeyReceivable.Where(x => x.DateTimeReceived != null).OrderByDescending(x => x.Id).Skip(skip).Take(take).ToListAsync();
+        }
+
         public async Task<List<EskeyReceivable>> GetMany(int skip, int take)
         {
             var result = await __dbContext.EskeyReceivable.OrderByDescending(x=> x.DateProcessed).Skip(skip).Take(take).ToListAsync();

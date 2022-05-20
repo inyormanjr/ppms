@@ -35,6 +35,22 @@ namespace PMS.Controllers
             return ret;
         }
 
+        [HttpGet("receivable")]
+        [Authorize]
+        public async Task<ActionResult<List<EskeyReceivable>>> GetEskeysForReceiving(int skip, int take = 10)
+        {
+            var ret = await _eskeyReceivableService.GetEskeyDeliveryReceivable(skip, take);
+            return ret;
+        }
+
+        [HttpGet("received")]
+        [Authorize]
+        public async Task<ActionResult<List<EskeyReceivable>>> GetEskeysReceived(int skip, int take = 15)
+        {
+            var ret = await _eskeyReceivableService.GetEskeyDeliveryReceived(skip, take);
+            return ret;
+        }
+
         [HttpGet("{id}")]
         [Authorize]
         public async Task<ActionResult<EskeyReceivableCreateDTO>> GetEskeysReceivablesId(int id)
@@ -55,13 +71,16 @@ namespace PMS.Controllers
             return _mapper.Map<EskeyReceivableCreateDTO>(result);
         }
 
-        [HttpPut("Update/{id}")]
+        [HttpPut("{id}")]
         [Authorize]
-        public async Task<ActionResult<EskeyReceivableCreateDTO>> UpdateEskeyReceivable(int id, EskeyReceivableCreateDTO eskeyReceivableCreateDTO)
+        public async Task<ActionResult<EskeyReceivableViewDTO>> UpdateEskeyReceivable(int id, EskeyReceivableCreateDTO eskeyReceivableCreateDTO)
         {
             var mapped = _mapper.Map<EskeyReceivable>(eskeyReceivableCreateDTO);
+            if(mapped.DateTimeReceived == null) {
+                mapped.DateTimeReceived = DateTime.Now;
+            }
             var result = await this._eskeyReceivableService.Update(id, mapped);
-            return _mapper.Map<EskeyReceivableCreateDTO>(result);
+            return _mapper.Map<EskeyReceivableViewDTO>(result);
         }
     }
 }

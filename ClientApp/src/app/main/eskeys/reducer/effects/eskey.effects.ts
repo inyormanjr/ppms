@@ -19,7 +19,7 @@ export class EskeyEffects {
       this.actions$.pipe(
         ofType(EskeyActions.loadEskeyReceivables),
         tap((action) => {
-          this.eskeyService.Get().pipe(map((data: EskeyReceivable[]) => {
+          this.eskeyService.GetEskeyReceivable().pipe(map((data: EskeyReceivable[]) => {
             this.store.dispatch(EskeyActions.loadEskeyReceivablesSuccess({ data }));
           })).subscribe(noop, (error) => { console.log(error) });
         })

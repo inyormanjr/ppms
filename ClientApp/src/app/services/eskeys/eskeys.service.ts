@@ -7,38 +7,62 @@ import { Observable } from 'rxjs';
 import { EskeyReceivable } from 'src/app/models/receivablesAgg/eskeyReceivable';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class EskeysService extends BaseService implements IBaseService<EskeyReceivable> {
-
+export class EskeysService
+  extends BaseService
+  implements IBaseService<EskeyReceivable>
+{
   constructor(private httpClient: HttpClient) {
     super();
     this.baseURL = this.baseURL + 'eskeys/';
   }
 
-
   Get(): Observable<EskeyReceivable[]> {
-    return this.httpClient.get<EskeyReceivable[]>(this.baseURL)
-      .pipe(map((response: EskeyReceivable[]) => {
+    return this.httpClient.get<EskeyReceivable[]>(this.baseURL).pipe(
+      map((response: EskeyReceivable[]) => {
         return response;
-      }));
+      })
+    );
+  }
+
+  GetEskeyReceivable(): Observable<EskeyReceivable[]> {
+    return this.httpClient.get<EskeyReceivable[]>(this.baseURL + "receivable").pipe(
+      map((response: EskeyReceivable[]) => {
+        return response;
+      })
+    );
   }
   GetById(id: number): Observable<EskeyReceivable> {
-    return this.httpClient.get<EskeyReceivable>(this.baseURL)
-      .pipe(map((response: EskeyReceivable) => response));
+    return this.httpClient.get<EskeyReceivable>(this.baseURL + id).pipe(
+      map((response: EskeyReceivable) => {
+        return response;
+      })
+    );
+  }
+
+  GetEskeysReceived(): Observable<EskeyReceivable[]> {
+    return this.httpClient
+      .get<EskeyReceivable[]>(this.baseURL + 'received')
+      .pipe(
+        map((response: EskeyReceivable[]) => {
+          return response;
+        })
+      );
   }
   Create(t: EskeyReceivable): Observable<EskeyReceivable> {
-    return this.httpClient.post<EskeyReceivable>(this.baseURL,  t )
+    return this.httpClient
+      .post<EskeyReceivable>(this.baseURL, t)
       .pipe(map((response: EskeyReceivable) => response));
   }
   Update(id: number, t: EskeyReceivable): Observable<any> {
-    return this.httpClient.put<EskeyReceivable>(this.baseURL + id,  t )
+    return this.httpClient
+      .put<EskeyReceivable>(this.baseURL + id, t)
       .pipe(map((response: EskeyReceivable) => response));
   }
   Delete(id: number): Observable<any> {
-    return this.httpClient.delete(this.baseURL + id)
+    return this.httpClient
+      .delete(this.baseURL + id)
       .pipe(map((response: any) => response));
   }
-
-
 }

@@ -18,7 +18,7 @@
             <td>{{item.count}}</td>
             <td>{{item.arrivalDateTime | date}}</td>
             <td class="text-end">
-              <button type="button" class="btn btn-outline-danger">Receive</button>
+              <button type="button" [routerLink]="['receive', item.id]" class="btn btn-outline-danger">Receive</button>
             </td>
           </tr>
         </tbody>

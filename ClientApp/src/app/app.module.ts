@@ -38,7 +38,7 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     JwtModule.forRoot({
       config: {

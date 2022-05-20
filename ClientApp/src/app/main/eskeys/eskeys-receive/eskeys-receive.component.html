@@ -1,0 +1,49 @@
+<form *ngIf="EskeyReceivable" [formGroup]="eskeyReceivableForm">
+<div  class="container">
+  <h1 class="mt-5 display-5">Eskey Receiving View</h1>
+  <div class="row mt-5">
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Location</label>
+    <input readonly type="text" formControlName="location" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Date Processed</label>
+      <input readonly type="text" min="1997-01-01" max="2030-12-31" formControlName="dateProcessed" class="form-control" id="exampleFormControlInput1"
+        placeholder="name@example.com">
+    </div>
+  </div>
+  <div class="container-fluid" formArrayName="eskeyReceivableDetails">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">EskeyNo</th>
+          <th scope="col">Description</th>
+          <th scope="col">Temp</th>
+          <th scope="col">Checked</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let item of this.eskeyReceivableForm.controls.eskeyReceivableDetails.value; let eskeyIndex= index; trackBy: trackByFn"
+        [formGroupName]="eskeyIndex">
+          <th scope="row">{{eskeyIndex + 1}}</th>
+          <td>{{item.eskeyNo}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.temp}}</td>
+          <td class="text-right">
+            <div class="form-check">
+            <input class="form-check-input" formControlName="checked" type="checkbox" id="inlineCheckbox1" value="option1">
+          </div>
+        </tr>
+
+      </tbody>
+    </table>
+
+  <div class="row justify-content-end">
+    <button type="button" class="btn btn-outline-danger" (click)="receiveEskeyDelivery()">Save</button>
+
+
+  </div>
+  </div>
+</div>
+</form>

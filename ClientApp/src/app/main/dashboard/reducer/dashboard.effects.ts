@@ -18,7 +18,7 @@ export class DashboardEffects {
         ofType(DashboardActions.fetchEskeyReceivable),
         tap((action) => {
           this.eskeyService
-            .Get()
+            .GetEskeyReceivable()
             .pipe(
               map((data: EskeyReceivable[]) => {
                 this.store.dispatch(DashboardActions.populateEskeyReceivable({ data }));
