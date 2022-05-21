@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row pt-4">
+    <div class="accordion" id="test">
+      <div *ngFor="let item of receivedEskeys" class="accordion-item">
+        <h2 class="accordion-header" id="{{'collapse' + item.id}}">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#target'+item.id" aria-expanded="true" [attr.aria-controls]="'collapse' + item.id">
+            [ <strong>{{item.location}}</strong>]  {{item.dateTimeReceived | date:'medium'}}
+          </button>
+        </h2>
+        <div id="{{'target'+item.id}}" class="accordion-collapse collapse" aria-labelledby="29" [attr.data-bs-parent]="'#test'">
+          <div class="accordion-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">EskeyNo</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Temp</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let detail of item.eskeyReceivableDetails; let eskeyIndex = index;">
+                  <th scope="row">{{eskeyIndex + 1}}</th>
+                  <td>{{detail.eskeyNo}}</td>
+                  <td>{{detail.description}}</td>
+                  <td>{{detail.temp}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,13 +8,15 @@ export const dashboardFeatureKey = 'dashboard';
 
 export interface DashboardState {
   anouncements: [],
-  eskeyReceivables: EskeyReceivable[]
+  eskeyReceivables: EskeyReceivable[],
+  eskeysReceived: EskeyReceivable[]
 
 }
 
 export const initialDashboardState: DashboardState = {
   anouncements: [],
-  eskeyReceivables: []
+  eskeyReceivables: [],
+  eskeysReceived: []
 };
 
 export const dashboardReducer = createReducer(initialDashboardState,
@@ -23,5 +25,11 @@ export const dashboardReducer = createReducer(initialDashboardState,
       ...state,
       eskeyReceivables: action.data
     }
-})
+  }),
+  on(DashboardActions.populateEskeyReceived, (state, action) => {
+    return {
+      ...state,
+      eskeysReceived: action.data
+    }
+  })
 );

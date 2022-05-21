@@ -61,6 +61,13 @@ export class EskeyCreateComponent implements OnInit {
     this.eskeyReceivableDetails.push(this.eskeyReceivableDetailsControl);
   }
 
+  removeSelectedEskeyReceivableDetail(index: number) {
+     let countNewValue =
+       (this.eskeyReceivableForm.controls.count.value as number) - 1;
+    this.eskeyReceivableForm.controls.count.patchValue(countNewValue);
+    this.eskeyReceivableDetails.removeAt(index);
+  }
+
   createEskey() {
     let receivable = Object.assign(this.eskeyReceivableForm.value);
 

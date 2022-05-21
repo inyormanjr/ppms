@@ -11,7 +11,8 @@ import * as fromMain from './reducers';
 const routes: Routes = [{
   path: '', component: MainViewComponent, children: [
     { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
-    {path: 'eskeys', loadChildren: () => import('./eskeys/eskeys.module').then(m => m.EskeysModule)},
+    { path: 'eskeys', loadChildren: () => import('./eskeys/eskeys.module').then(m => m.EskeysModule) },
+    { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)},
     { path: '', redirectTo: 'dashboard', pathMatch: 'full'}
 ]}];
 @NgModule({

@@ -13,20 +13,53 @@ import { noop } from 'rxjs';
 
 @Injectable()
 export class EskeyEffects {
-
   fetchEskeyReceivable$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(EskeyActions.loadEskeyReceivables),
         tap((action) => {
-          this.eskeyService.GetEskeyReceivable().pipe(map((data: EskeyReceivable[]) => {
-            this.store.dispatch(EskeyActions.loadEskeyReceivablesSuccess({ data }));
-          })).subscribe(noop, (error) => { console.log(error) });
+          this.eskeyService
+            .GetEskeyReceivable()
+            .pipe(
+              map((data: EskeyReceivable[]) => {
+                this.store.dispatch(
+                  EskeyActions.loadEskeyReceivablesSuccess({ data })
+                );
+              })
+            )
+            .subscribe(noop, (error) => {
+              console.log(error);
+            });
         })
       ),
     { dispatch: false }
   );
 
+  fetchEskeyReceived$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(EskeyActions.loadEskeyReceivables),
+        tap((action) => {
+          this.eskeyService
+            .GetEskeysReceived()
+            .pipe(
+              map((data: EskeyReceivable[]) => {
+                this.store.dispatch(
+                  EskeyActions.loadEskeyReceivedSuccess({ data })
+                );
+              })
+            )
+            .subscribe(noop, (error) => {
+              console.log(error);
+            });
+        })
+      ),
+    { dispatch: false }
+  );
 
-  constructor(private actions$: Actions, private eskeyService: EskeysService, private store: Store<EskeysState>) {}
+  constructor(
+    private actions$: Actions,
+    private eskeyService: EskeysService,
+    private store: Store<EskeysState>
+  ) {}
 }

@@ -6,3 +6,9 @@ export const eskeyFeature = createFeatureSelector<EskeysState>(eskeysFeatureKey)
 
 export const selectEskeyReceivables = createSelector(eskeyFeature, app => app.eskeyReceivables);
 
+export const selectEskeyReceived = createSelector(
+  eskeyFeature,
+  (app) => app.eskeysReceived
+);
+
+

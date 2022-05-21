@@ -7,3 +7,7 @@ export const selectDashboardFeature = createFeatureSelector<DashboardState>(dash
 
 export const selectAnouncements = createSelector(selectDashboardFeature, x => x.anouncements);
 export const selectEskeyReceivable = createSelector(selectDashboardFeature, x => x.eskeyReceivables);
+export const selectEskeyReceived = createSelector(
+  selectDashboardFeature,
+  (x) => x.eskeysReceived
+);

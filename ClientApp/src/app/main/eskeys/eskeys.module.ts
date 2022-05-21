@@ -13,6 +13,7 @@ import { eskeysReducer } from './reducer/eskeys.reducer';
 import { EskeysReceivablesTableComponent } from './components/eskeys-receivables-table/eskeys-receivables-table.component';
 import { EskeyCreateComponent } from './eskey-create/eskey-create.component';
 import { EskeysReceiveComponent } from './eskeys-receive/eskeys-receive.component';
+import { EskeysReceivedComponent } from './components/eskeys-received/eskeys-received.component';
 
 const router: Routes = [
   { path: '', component: EskeysViewComponent },
@@ -25,6 +26,7 @@ const router: Routes = [
     EskeysReceivablesTableComponent,
     EskeyCreateComponent,
     EskeysReceiveComponent,
+    EskeysReceivedComponent,
   ],
   imports: [
     CommonModule,

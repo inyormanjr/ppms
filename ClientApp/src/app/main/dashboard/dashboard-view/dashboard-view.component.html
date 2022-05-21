@@ -48,7 +48,9 @@
       </div>
       <div class="row">
           <div class="col-md-6 col-lg-6 col-sm-12 mb-1">
-            <app-eskeys-received-table-card></app-eskeys-received-table-card>
+            <app-eskeys-received-table-card *ngIf="receivedEskeys$ | async as receivedEskeys"  [receivedEskeys]="receivedEskeys">
+              
+            </app-eskeys-received-table-card>
           </div>
           <div class="col-md-6 col-lg-6 col-sm-12 mb-1">
             <app-eskeys-incoming-table-card *ngIf="incomingEskey$ | async as incomingEskeys"  [incomingEskeys]="incomingEskeys"></app-eskeys-incoming-table-card>

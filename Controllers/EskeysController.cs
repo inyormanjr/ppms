@@ -45,10 +45,11 @@ namespace PMS.Controllers
 
         [HttpGet("received")]
         [Authorize]
-        public async Task<ActionResult<List<EskeyReceivable>>> GetEskeysReceived(int skip, int take = 15)
+        public async Task<ActionResult<List<EskeyReceivableViewDTO>>> GetEskeysReceived(int skip, int take = 15)
         {
             var ret = await _eskeyReceivableService.GetEskeyDeliveryReceived(skip, take);
-            return ret;
+            var mapped = _mapper.Map<List<EskeyReceivableViewDTO>>(ret);
+            return mapped;
         }
 
         [HttpGet("{id}")]

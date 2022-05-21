@@ -6,10 +6,12 @@ export const eskeysFeatureKey = 'eskeys';
 
 export interface EskeysState {
   eskeyReceivables: EskeyReceivable[];
+  eskeysReceived: EskeyReceivable[];
 }
 
 export const eskeysInitialState: EskeysState = {
   eskeyReceivables: [],
+  eskeysReceived: [],
 };
 
 export const eskeysReducer = createReducer(
@@ -19,5 +21,11 @@ export const eskeysReducer = createReducer(
       ...state,
       eskeyReceivables: action.data,
     };
+  }),
+  on(EskeyActions.loadEskeyReceivedSuccess, (state, action) => {
+    return {
+      ...state,
+      eskeysReceived: action.data
+    }
   })
 );

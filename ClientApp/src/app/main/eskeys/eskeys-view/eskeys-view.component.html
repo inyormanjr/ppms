@@ -22,7 +22,9 @@
         </app-eskeys-receivables-table>
       </div>
     </div></div>
-    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...2</div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+       <app-eskeys-received *ngIf="receivedEskeys$ | async as receivedEskeys" [receivedEskeys]="receivedEskeys"></app-eskeys-received>
+    </div>
   </div>
 </div>
 

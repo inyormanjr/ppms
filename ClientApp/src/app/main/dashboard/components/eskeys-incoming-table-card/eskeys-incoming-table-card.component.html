@@ -6,21 +6,17 @@
             <table class="table mt-3 text-center">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Count</th>
-                  <th scope="col">Arrival DateTime</th>
                   <th scope="col">Location</th>
-
-
+                  <th scope="col">Count</th>
+                  <th scope="col">Arrival Date</th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr *ngFor="let item of incomingEskeys">
-                  <th scope="row">{{item.id}}</th>
+                <tr *ngFor="let item of incomingEskeys; let indexCount = index;">
+                  <th scope="row">{{item.location}}</th>
                   <td>{{item.count}}</td>
                   <td>{{item.arrivalDateTime | date}}</td>
-                  <td>{{item.location}}</td>
                 </tr>
               </tbody>
             </table>

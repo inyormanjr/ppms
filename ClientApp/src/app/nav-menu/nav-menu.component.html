@@ -12,13 +12,14 @@
             <a  class="nav-link text-light" [routerLink]="['/login']">Login</a>
           </li>
         </ul>
-        <ul class="navbar-nav flex-grow">
+        <ul *ngIf="appUser$ | async as user" class="navbar-nav flex-grow">
             <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
               <a class="nav-link text-light"[routerLink]="['../home/dashboard']">Dashboard</a>
             </li>
             <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
               <a class="nav-link text-light" [routerLink]="['../home/eskeys']">Eskeys</a>
             </li>
+
         </ul>
         <div *ngIf="appUser$ | async as user" class="dropdown">
           <button class="btn  text-light dropdown-toggle" type="button" id="dropdownMenuButton1"
@@ -26,7 +27,7 @@
             {{user.username}}
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" [routerLink]="['../home/profile']">Profile</a></li>
             <li><a class="dropdown-item" (click)="logOut()">Log-Out</a></li>
           </ul>
         </div>

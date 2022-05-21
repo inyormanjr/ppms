@@ -8,8 +8,7 @@
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Date Processed</label>
-      <input readonly type="text" min="1997-01-01" max="2030-12-31" formControlName="dateProcessed" class="form-control" id="exampleFormControlInput1"
-        placeholder="name@example.com">
+      <input readonly type="text" min="1997-01-01" max="2030-12-31" formControlName="dateProcessed" class="form-control" id="exampleFormControlInput1">
     </div>
   </div>
   <div class="container-fluid" formArrayName="eskeyReceivableDetails">
@@ -39,10 +38,10 @@
       </tbody>
     </table>
 
-  <div class="row justify-content-end">
-    <button type="button" class="btn btn-outline-danger" (click)="receiveEskeyDelivery()">Save</button>
-
-
+  <div class="row  mb-3">
+    <div class="col-md-12 d-flex flex-row justify-content-end">
+    <button type="button" class="btn btn-outline-success" (click)="receiveEskeyDelivery()">Receive</button>
+    </div>
   </div>
   </div>
 </div>

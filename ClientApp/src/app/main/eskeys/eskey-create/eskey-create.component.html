@@ -30,7 +30,7 @@
     </div>
     <div class="col-md-4">
       <label for="count" class="form-label">No. Of Eskeys</label>
-      <input  type="number" formControlName="count" class="form-control" [value]="1" id="count">
+      <input [readonly]="disableGenerate"  type="number" formControlName="count" class="form-control" [value]="1" id="count">
     </div>
     <div class="col-md-2">
       <button [hidden]="disableGenerate" type="submit" (click)="generateEskeyReceivableDetails()" class="btn btn-primary">Generate Eskey Details</button>
@@ -43,7 +43,7 @@
          [formGroupName]="eskeyIndex"
 
           class="row mb-3 p-3 border">
-            <div class="col-md-3">
+            <div class="col-md-2">
               <label for="eskeyNo" class="form-label">Eskey No</label>
               <input type="number" formControlName="eskeyNo" class="form-control" [value]="1" id="eskeyNo">
             </div>
@@ -58,6 +58,9 @@
             <div class="col-md-2">
               <label for="initials" class="form-label">Initials</label>
               <input  type="text" formControlName="initials" class="form-control" id="initials">
+            </div>
+            <div class="col-md-1 d-flex flex-column justify-content-center align-items-end">
+              <button type="button" class="btn-close text-bold" (click)="removeSelectedEskeyReceivableDetail(eskeyIndex)" aria-label="Close"></button>
             </div>
           </div>
     </div>

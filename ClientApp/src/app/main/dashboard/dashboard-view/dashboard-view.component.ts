@@ -9,22 +9,21 @@ import { DashboardSelector } from '../reducer/dashboardSelectorTypes';
 @Component({
   selector: 'app-dashboard-view',
   templateUrl: './dashboard-view.component.html',
-  styleUrls: ['./dashboard-view.component.css']
+  styleUrls: ['./dashboard-view.component.css'],
 })
 export class DashboardViewComponent implements OnInit {
-
   incomingEskey$: Observable<EskeyReceivable[]>;
+  receivedEskeys$: Observable<EskeyReceivable[]>;
   constructor(private store: Store<DashboardState>) {
-
     this.store.dispatch(DashboardActions.fetchEskeyReceivable());
+    this.store.dispatch(DashboardActions.fetchEskeyReceived());
 
     this.incomingEskey$ = this.store.select(
       DashboardSelector.selectEskeyReceivable
     );
+
+    this.receivedEskeys$ = this.store.select(DashboardSelector.selectEskeyReceived);
   }
 
-  ngOnInit(): void {
-
-  }
-
+  ngOnInit(): void {}
 }

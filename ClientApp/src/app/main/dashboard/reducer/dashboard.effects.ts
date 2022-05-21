@@ -21,7 +21,31 @@ export class DashboardEffects {
             .GetEskeyReceivable()
             .pipe(
               map((data: EskeyReceivable[]) => {
-                this.store.dispatch(DashboardActions.populateEskeyReceivable({ data }));
+                this.store.dispatch(
+                  DashboardActions.populateEskeyReceivable({ data })
+                );
+              })
+            )
+            .subscribe(noop, (error) => {
+              console.log(error);
+            });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  fetchEskeyReceived$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(DashboardActions.fetchEskeyReceivable),
+        tap((action) => {
+          this.eskeyService
+            .GetEskeysReceived()
+            .pipe(
+              map((data: EskeyReceivable[]) => {
+                this.store.dispatch(
+                  DashboardActions.populateEskeyReceived({ data })
+                );
               })
             )
             .subscribe(noop, (error) => {
