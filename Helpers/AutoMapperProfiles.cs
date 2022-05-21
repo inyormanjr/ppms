@@ -10,9 +10,11 @@ namespace PMS.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<AppUser, UserDTO>().ReverseMap();
+            CreateMap<UserProfileDTO, AppUser>().ReverseMap();
             CreateMap<EskeyReceivableCreateDTO, EskeyReceivable>().ReverseMap();
             CreateMap<EskeyReceivableDetailCreateDTO, EskeyReceivableDetail>().ReverseMap();
             CreateMap<EskeyReceivableViewDTO, EskeyReceivable>().ReverseMap();
+           
         }
     }
 }
