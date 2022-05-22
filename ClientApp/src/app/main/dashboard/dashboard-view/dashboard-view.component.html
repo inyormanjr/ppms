@@ -10,15 +10,17 @@
     <div class="container-fluid">
       <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
-              <div class="card h-100" style="max-height: 800px; height: 800px;">
+              <div class="card h-100" >
                 <div class="card-body">
                   <h5 class="card-title">Recent Activities</h5>
-                 <ul class="list-group">
-                   <li *ngFor="let item of activityList$ | async" class="list-group-item d-flex justify-content-between">
-                     <span class="text-truncate" style="max-width: 70%;">(<b>{{item.subject}}</b>) {{item.description}}</span>
-                     <span class="text-muted">{{item.createdAt | date:"medium"}}</span>
-                   </li>
-                 </ul>
+                  <div class="list-container" style="min-height: 420px; max-height:420px; overflow: auto;" >
+                  <ul class="list-group">
+                  <li *ngFor="let item of activityList$ | async" class="list-group-item d-flex justify-content-between">
+                    <span class="text-truncate" style="max-width: 70%;">(<b>{{item.subject}}</b>) {{item.description}}</span>
+                    <span class="text-muted">{{item.createdAt | date:"medium"}}</span>
+                  </li>
+                   </ul>
+                  </div>
                 </div>
                 <div class="card-footer">
                   <small class="text-muted"></small>
