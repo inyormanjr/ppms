@@ -12,36 +12,16 @@
             <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
               <div class="card h-100" style="max-height: 800px; height: 800px;">
                 <div class="card-body">
-                  <h5 class="card-title">Activities</h5>
+                  <h5 class="card-title">Recent Activities</h5>
                  <ul class="list-group">
-                   <li class="list-group-item d-flex justify-content-between">
-                     <span class="">(<b>ClientCare</b>) Recollection Required</span>
-                     <span class="text-muted">20-15-2022 9:55pm</span>
+                   <li *ngFor="let item of activityList$ | async" class="list-group-item d-flex justify-content-between">
+                     <span class="text-truncate" style="max-width: 70%;">(<b>{{item.subject}}</b>) {{item.description}}</span>
+                     <span class="text-muted">{{item.createdAt | date:"medium"}}</span>
                    </li>
-                   <li class="list-group-item d-flex justify-content-between">
-                    <span class="">(<b>SRA</b>) VIC Batches</span>
-                    <span class="text-muted">20-15-2022 10:55pm</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between">
-                    <span class="">(<b>Mel-SRA</b>) URGENT BATCH 3 SAVED</span>
-                    <span class="text-muted">20-15-2022 12:55pm</span>
-                  </li>
-                    <li class="list-group-item d-flex justify-content-between">
-                      <span class="">(<b>Mel-SRA</b>) URGENT BATCH 4 SAVED</span>
-                      <span class="text-muted">20-15-2022 12:55pm</span>
-                    </li>
-                      <li class="list-group-item d-flex justify-content-between">
-                        <span class="">(<b>Mel-SRA</b>) URGENT BATCH 5 SAVED</span>
-                        <span class="text-muted">20-15-2022 12:55pm</span>
-                      </li>
-                        <li class="list-group-item d-flex justify-content-between">
-                          <span class="">(<b>Mel-SRA</b>) URGENT BATCH 6 SAVED</span>
-                          <span class="text-muted">20-15-2022 12:55pm</span>
-                        </li>
                  </ul>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
+                  <small class="text-muted"></small>
                 </div>
               </div>
             </div>
@@ -49,7 +29,7 @@
       <div class="row">
           <div class="col-md-6 col-lg-6 col-sm-12 mb-1">
             <app-eskeys-received-table-card *ngIf="receivedEskeys$ | async as receivedEskeys"  [receivedEskeys]="receivedEskeys">
-              
+
             </app-eskeys-received-table-card>
           </div>
           <div class="col-md-6 col-lg-6 col-sm-12 mb-1">

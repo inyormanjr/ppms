@@ -1,0 +1,4 @@
+.item-detail:hover {
+  background-color: rgb(247, 245, 245);
+  cursor: pointer;
+}

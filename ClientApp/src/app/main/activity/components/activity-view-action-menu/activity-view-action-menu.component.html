@@ -1,0 +1,29 @@
+<div class="row mb-4" id="action-menu ">
+  <div class="col-md-8 g-0">
+    <div class="input-group">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+        aria-expanded="false">Filter By</button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="#">Separated link</a></li>
+      </ul>
+      <input type="text" class="form-control bg-light" aria-label="Text input with dropdown button"
+        placeholder="Search Activity">
+    </div>
+  </div>
+  <div class="col-md-2 d-flex flex-row justify-content-center">
+    <div class="btn-group w-100" role="group" aria-label="Basic outlined example">
+      <button type="button" class="btn btn-secondary">Activity Types</button>
+    </div>
+  </div>
+  <div class="col-md-2 d-flex flex-row ">
+    <div class="w-100 btn-group">
+      <button type="button"  [routerLink]="['create']"  class="btn btn-success" >New Activity</button>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,18 @@
+import { Activity } from 'src/app/models/activityAgg/activity';
 import { EskeyReceivable } from './../../../models/receivablesAgg/eskeyReceivable';
 import { createAction, props } from '@ngrx/store';
 
 
 export const fetchEskeyReceivable = createAction('[Dashboard] Fetch Incoming Eskeys from API');
+
+export const fetchActivities = createAction(
+  '[Dashboard] Fetch Activities  from API'
+);
+
+export const fetchActivitiesSuccess = createAction(
+  '[Dashboard] Fetch Activities  from API',
+  props<{data: Activity[]}>()
+);
 
 export const fetchEskeyReceived = createAction(
   '[Dashboard] Fetch Received Eskeys from API'

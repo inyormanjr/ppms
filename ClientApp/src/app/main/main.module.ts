@@ -12,7 +12,8 @@ const routes: Routes = [{
   path: '', component: MainViewComponent, children: [
     { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
     { path: 'eskeys', loadChildren: () => import('./eskeys/eskeys.module').then(m => m.EskeysModule) },
-    { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)},
+    { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
+    {path: 'activities', loadChildren: () => import('./activity/activity.module').then(m => m.ActivityModule)},
     { path: '', redirectTo: 'dashboard', pathMatch: 'full'}
 ]}];
 @NgModule({

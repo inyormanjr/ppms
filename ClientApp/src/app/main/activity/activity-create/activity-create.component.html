@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" href="#">Activity Creation</a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      </ul>
+      <form class="d-flex">
+
+      </form>
+    </div>
+  </div>
+</nav>
+<form [formGroup]="activityForm">
+<div class="container bg-light p-4 mt-3">
+  <div class="row">
+    <div class="mb-4 col-md-12">
+      <label for="exampleFormControlInput1" class="form-label">Subject</label>
+      <input type="text" class="form-control"
+      formControlName="subject"
+      id="exampleFormControlInput1" placeholder="subject name">
+    </div>
+
+    <div class="mb-3 col-md-6">
+      <label for="exampleFormControlTextarea1" class="form-label">Type</label>
+      <select class="form-select" aria-label="Default select example"
+        formControlName="activityTypeId">
+        <option *ngFor="let type of activityTypes$ | async" [ngValue]="type.id">{{type.typeName}}
+        </option>
+      </select>
+    </div>
+    <div class="mb-3 col-md-6">
+      <label for="exampleFormControlTextarea1" class="form-label">Level</label>
+      <select class="form-select" aria-label="Default select example"
+      formControlName="level">
+        <option  [ngValue]="0">Normal</option>
+        <option [ngValue]="1">Important</option>
+        <option [ngValue]="2">Urgent</option>
+      </select>
+    </div>
+    <div class="mb-3 col-md-12">
+      <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1"
+      formControlName="description"
+      rows="5"></textarea>
+    </div>
+    <div class="col-md-12 d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-success"
+        (click)="save()">Save Activity</button>
+    </div>
+  </div>
+</div>
+</form>

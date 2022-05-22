@@ -1,3 +1,4 @@
+import { Activity } from 'src/app/models/activityAgg/activity';
 import { Observable } from 'rxjs';
 import { EskeyReceivable } from './../../../models/receivablesAgg/eskeyReceivable';
 import { Store } from '@ngrx/store';
@@ -12,12 +13,16 @@ import { DashboardSelector } from '../reducer/dashboardSelectorTypes';
   styleUrls: ['./dashboard-view.component.css'],
 })
 export class DashboardViewComponent implements OnInit {
+  activityList$: Observable<Activity[]>;
   incomingEskey$: Observable<EskeyReceivable[]>;
   receivedEskeys$: Observable<EskeyReceivable[]>;
   constructor(private store: Store<DashboardState>) {
+     this.store.dispatch(DashboardActions.fetchActivities());
     this.store.dispatch(DashboardActions.fetchEskeyReceivable());
     this.store.dispatch(DashboardActions.fetchEskeyReceived());
-
+     this.activityList$ = this.store.select(
+       DashboardSelector.selectActivities
+     );
     this.incomingEskey$ = this.store.select(
       DashboardSelector.selectEskeyReceivable
     );
