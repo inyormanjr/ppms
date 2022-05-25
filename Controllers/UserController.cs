@@ -39,18 +39,23 @@ namespace PMS.Controllers
         [HttpPut]
         [Authorize]
         public async Task<ActionResult<UserProfileDTO>> UpdateProfile(UserProfileDTO userProfileDTO) {
-            var mapped = _mapper.Map<AppUser>(userProfileDTO);
-             _context.Users.Update(mapped);
+            var currentID = this.User.Claims.FirstOrDefault().Value;
+            var currentProfile = await _context.Users.FindAsync(currentID);
+            if(currentProfile == null) return BadRequest("No User Found.");
+            currentProfile.GivenName = userProfileDTO.GivenName;
+            currentProfile.Surname = userProfileDTO.Surname;
+            currentProfile.Contact = userProfileDTO.Contact;
+            currentProfile.Address = userProfileDTO.Address;
+             _context.Users.Update(currentProfile);
             await _context.SaveChangesAsync();
-            var result = _mapper.Map<UserProfileDTO>(mapped);
+            var result = _mapper.Map<UserProfileDTO>(currentProfile);
             return result;
         }
 
         [HttpGet("profile")]
         [Authorize]
-        public async Task<ActionResult<UserProfileDTO>> GetUserByEmail()
+        public async Task<ActionResult<UserProfileDTO>> GetUserProfile()
         {
-
             var userId = this.User.Claims.FirstOrDefault().Value;
             var result = await _context.Users.FindAsync(int.Parse(userId));
             if (result == null) return new BadRequestResult();

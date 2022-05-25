@@ -18,12 +18,42 @@
 <form [formGroup]="activityForm">
 <div class="container bg-light p-4 mt-3">
   <div class="row">
+    <div class="mb-4 col-md-6">
+      <label for="exampleFormControlTextarea1" class="form-label">Department</label>
+      <select class="form-select" aria-label="Default select example" formControlName="activityTypeId">
+        <option *ngFor="let type of activityTypes$ | async" [ngValue]="type.id">{{type.typeName}}
+        </option>
+      </select>
+    </div>
     <div class="mb-4 col-md-12">
       <label for="exampleFormControlInput1" class="form-label">Subject</label>
       <input type="text" class="form-control"
       formControlName="subject"
       id="exampleFormControlInput1" placeholder="subject name">
     </div>
+
+      <div class="col-md-12 mb-3">
+        <label for="">Assignee</label>
+        <a href="" class="ms-2 text-success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+          </svg>
+        </a>
+      </div>
+      <div class="col-md-12">
+        <div class="assignee-list w-100 bg-white mb-3 p-2" style="min-height: 40px;">
+          <i class="badge text-decoration-none bg-primary m-2 p-2">jryap20@gmail.com
+            <a href="#" class="btn-close ms-2 text-white " aria-label="Close"></a></i>
+          <i class="badge text-decoration-none bg-primary m-2 p-2">jryap20@gmail.com
+            <a href="#" class="btn-close ms-2 text-white " aria-label="Close"></a></i>
+          <i class="badge text-decoration-none bg-primary m-2 p-2">jryap20@gmail.com
+            <a href="#" class="btn-close ms-2 text-white " aria-label="Close"></a></i>
+          <i class="badge text-decoration-none bg-primary m-2 p-2">jryap20@gmail.com
+            <a href="#" class="btn-close ms-2 text-white " aria-label="Close"></a></i>
+        </div>
+      </div>
 
     <div class="mb-3 col-md-6">
       <label for="exampleFormControlTextarea1" class="form-label">Type</label>
@@ -44,10 +74,9 @@
     </div>
     <div class="mb-3 col-md-12">
       <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1"
-      formControlName="description"
-      rows="5"></textarea>
+      <angular-editor  formControlName="description" [config]="editorConfig"></angular-editor>
     </div>
+
     <div class="col-md-12 d-flex justify-content-end">
         <button type="button" class="btn btn-outline-success"
         (click)="save()">Save Activity</button>

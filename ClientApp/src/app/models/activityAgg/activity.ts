@@ -7,6 +7,8 @@ import { ActivityType } from './activityType';
 export interface Activity {
   id: number;
   subject: string;
+  departmentId: number;
+  departmentName: string;
   description: string;
   activityTypeId: number;
   type: ActivityType;

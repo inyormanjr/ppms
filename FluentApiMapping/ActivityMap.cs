@@ -10,6 +10,7 @@ namespace PMS.FluentApiMapping
         {
             builder.HasKey(x => x.Id);
             builder.HasOne(x => x.Type).WithMany().HasForeignKey(x => x.ActivityTypeId);
+            builder.HasOne(x => x.Department).WithMany().HasForeignKey(x => x.DepartmentId);
             builder.HasOne(x => x.CreatedBy).WithMany().HasForeignKey(x => x.CreatedById);
             builder.HasMany(x => x.Assignees).WithOne(x => x.Activity).HasForeignKey(x => x.ActivityId).OnDelete(DeleteBehavior.Restrict);
         }

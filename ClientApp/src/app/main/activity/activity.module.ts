@@ -10,6 +10,7 @@ import { activityFeatureKey, activityViewReducer } from './reducer/activity.redu
 import { EffectsModule } from '@ngrx/effects';
 import { ActivityEffects } from './effect/activity.effects';
 import { ActivityCreateComponent } from './activity-create/activity-create.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 const route: Routes = [
@@ -26,6 +27,7 @@ const route: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    AngularEditorModule,
     RouterModule.forChild(route),
     StoreModule.forFeature(activityFeatureKey, activityViewReducer),
     EffectsModule.forFeature([ActivityEffects]),

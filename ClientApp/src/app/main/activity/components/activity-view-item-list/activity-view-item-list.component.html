@@ -45,7 +45,7 @@
 
 
   </ul>
-  
+
 
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -62,7 +62,6 @@
           <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
               <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Details</button>
-              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Assignee</button>
             </div>
           </nav>
           <div class="tab-content" id="nav-tabContent">
@@ -70,12 +69,18 @@
                 <div class="container-fluid">
                   <div class="row mt-2 bg-light p-3" style="min-height: 450px;">
                     <div class="col-md-12 d-flex flex-column ">
-                      <div class="text-muted text-small mb-2">
-                        Created <span class="fw-bold text-success">{{currentSelected?.typeName}}</span> by
-                        {{currentSelected?.createdByName}} at {{currentSelected?.createdAt |
-                        date:"medium"}}
-                      </div>
                       <pre style="font-size: 18px;" class="text-wrap">{{currentSelected?.description}}</pre>
+                    <div class="bottom-info  mt-auto">
+                        <div class="text-muted text-small  mb-1">
+                          <span class="fw-bold text-success">{{currentSelected?.typeName}}</span> Created by
+                          {{currentSelected?.createdByName}} at {{currentSelected?.createdAt |
+                          date:"medium"}}
+                        </div>
+                        <div class="text-muted text-small  mt-auto mb-2">
+                          Assigned to <i class="fw-1">jryap20@gmail.com</i>
+                        </div>
+                    </div>
+
                     </div>
                   </div>
                   <div class="row mt-2">
@@ -89,18 +94,6 @@
                     </div>
 
                   </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <div style="min-height: 450px;" class="assignee  container pt-4">
-                  <div  >
-                  <span class="badge badge-pill bg-secondary m-1">jryap20@gmail.com</span>
-                  <span class="badge badge-pill bg-secondary m-1">jryap20@gmail.com</span>
-                  <span class="badge badge-pill bg-secondary m-1">jryap20@gmail.com</span>
-                  <span class="badge badge-pill bg-secondary m-1">jryap20@gmail.com</span>
-                  <span class="badge badge-pill bg-secondary m-1">jryap20@gmail.com</span>
-                  </div>
-
                 </div>
             </div>
           </div>

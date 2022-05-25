@@ -1,9 +1,13 @@
+using PMS.Entities.DepartmentEntities;
+
 namespace PMS.Entities.ActivityEntities
 {
     public class Activity
     {
        
         public int Id { get; set; }
+        public int DepartmentId { get; set; }
+        public Department? Department { get; set; }
         public string Subject { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public int ActivityTypeId { get; set; }
