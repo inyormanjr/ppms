@@ -1,5 +1,5 @@
 
-import { User } from 'src/app/models/user';
+
 import { ActivityLevel } from './activity.level';
 import { ActivityType } from './activityType';
 
@@ -18,5 +18,21 @@ export interface Activity {
   createdByName: string;
   createdByUsername: string;
   level: ActivityLevel;
-  assignees: User[];
+  assignees: Assignee[];
+  comments: ActivityComment[];
+}
+
+
+export interface Assignee {
+  assigneeId: number;
+  assigneeUserName: string;
+  isSelected: boolean;
+}
+
+export interface ActivityComment {
+  commentorId: number;
+  activityId: number;
+  commentorUserName: string;
+  comment: string;
+  createdAt?: string;
 }

@@ -22,7 +22,7 @@ export const initialDashboardState: DashboardState = {
 
 export const dashboardReducer = createReducer(
   initialDashboardState,
-  on(DashboardActions.fetchActivitiesSuccess, (state, action) => {
+  on(DashboardActions.loadActivitysSuccess, (state, action) => {
     return {
       ...state,
       activities: action.data,

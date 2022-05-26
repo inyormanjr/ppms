@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PMS.Data;
 
@@ -11,9 +12,10 @@ using PMS.Data;
 namespace PMS.Data.Migrations
 {
     [DbContext(typeof(PMSDbContext))]
-    partial class PMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220525220827_assigneeMap")]
+    partial class assigneeMap
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,6 +77,9 @@ namespace PMS.Data.Migrations
                     b.Property<int>("ActivityId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ActivityId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("AssigneeId")
                         .HasColumnType("int");
 
@@ -82,39 +87,11 @@ namespace PMS.Data.Migrations
 
                     b.HasIndex("ActivityId");
 
+                    b.HasIndex("ActivityId1");
+
                     b.HasIndex("AssigneeId");
 
                     b.ToTable("ActivityAssignee");
-                });
-
-            modelBuilder.Entity("PMS.Entities.ActivityEntities.ActivityComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ActivityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CommentorId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
-
-                    b.HasIndex("CommentorId");
-
-                    b.ToTable("ActivityComment");
                 });
 
             modelBuilder.Entity("PMS.Entities.ActivityEntities.ActivityType", b =>
@@ -301,10 +278,14 @@ namespace PMS.Data.Migrations
             modelBuilder.Entity("PMS.Entities.ActivityEntities.ActivityAssignee", b =>
                 {
                     b.HasOne("PMS.Entities.ActivityEntities.Activity", "Activity")
-                        .WithMany("Assignees")
+                        .WithMany()
                         .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("PMS.Entities.ActivityEntities.Activity", null)
+                        .WithMany("Assignees")
+                        .HasForeignKey("ActivityId1");
 
                     b.HasOne("PMS.Entities.AppUser", "Assignee")
                         .WithMany()
@@ -315,25 +296,6 @@ namespace PMS.Data.Migrations
                     b.Navigation("Activity");
 
                     b.Navigation("Assignee");
-                });
-
-            modelBuilder.Entity("PMS.Entities.ActivityEntities.ActivityComment", b =>
-                {
-                    b.HasOne("PMS.Entities.ActivityEntities.Activity", "Activity")
-                        .WithMany("Comments")
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("PMS.Entities.AppUser", "Commentor")
-                        .WithMany()
-                        .HasForeignKey("CommentorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Activity");
-
-                    b.Navigation("Commentor");
                 });
 
             modelBuilder.Entity("PMS.Entities.EskeysEntities.EskeyReceivable", b =>
@@ -361,8 +323,6 @@ namespace PMS.Data.Migrations
             modelBuilder.Entity("PMS.Entities.ActivityEntities.Activity", b =>
                 {
                     b.Navigation("Assignees");
-
-                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("PMS.Entities.EskeysEntities.EskeyReceivable", b =>

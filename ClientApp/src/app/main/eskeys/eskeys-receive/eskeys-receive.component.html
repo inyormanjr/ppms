@@ -2,13 +2,17 @@
 <div  class="container">
   <h1 class="mt-5 display-5">Eskey Receiving View</h1>
   <div class="row mt-5">
-  <div class="mb-3">
+  <div class="mb-3 col-md-12">
     <label for="exampleFormControlInput1" class="form-label">Location</label>
-    <input readonly type="text" formControlName="location" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    <div class="detail w-100 bg-light p-3">
+        {{eskeyReceivableForm.controls.location.value}}
+    </div>
     </div>
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Date Processed</label>
-      <input readonly type="text" min="1997-01-01" max="2030-12-31" formControlName="dateProcessed" class="form-control" id="exampleFormControlInput1">
+    <div class="detail w-100 bg-light p-3">
+      {{eskeyReceivableForm.controls.dateProcessed.value | date:'medium'}}
+    </div>
     </div>
   </div>
   <div class="container-fluid" formArrayName="eskeyReceivableDetails">

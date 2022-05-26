@@ -5,13 +5,11 @@ import { createAction, props } from '@ngrx/store';
 
 export const fetchEskeyReceivable = createAction('[Dashboard] Fetch Incoming Eskeys from API');
 
-export const fetchActivities = createAction(
-  '[Dashboard] Fetch Activities  from API'
-);
+export const loadActivitys = createAction('[Dashboard] Load Activitys');
 
-export const fetchActivitiesSuccess = createAction(
-  '[Dashboard] Fetch Activities  from API',
-  props<{data: Activity[]}>()
+export const loadActivitysSuccess = createAction(
+  '[Dashboard] Load Activitys Success',
+  props<{ data: Activity[] }>()
 );
 
 export const fetchEskeyReceived = createAction(

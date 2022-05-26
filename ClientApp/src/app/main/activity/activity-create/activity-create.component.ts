@@ -1,4 +1,7 @@
-import { Router } from '@angular/router';
+
+import { UserProfile } from './../../../models/receivablesAgg/userProfile';
+import { Department } from './../../../models/department';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ActivityType } from './../../../models/activityAgg/activityType';
 import { Observable } from 'rxjs';
 import { ActivityService } from './../../../services/activity/activity.service';
@@ -7,15 +10,20 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { Assignee } from 'src/app/models/activityAgg/activity';
 
 @Component({
   selector: 'app-activity-create',
   templateUrl: './activity-create.component.html',
-  styleUrls: ['./activity-create.component.css']
+  styleUrls: ['./activity-create.component.css'],
+
 })
 export class ActivityCreateComponent implements OnInit {
   activityForm: FormGroup;
   activityTypes$: Observable<ActivityType[]>;
+  departments: Department[] = [];
+  userAsigness: Assignee[] = [];
+  searchUserModel: string = '';
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -60,15 +68,24 @@ export class ActivityCreateComponent implements OnInit {
       ['fontSize']
     ]
 };
-  constructor(private fB: FormBuilder, private activityService: ActivityService, private toaster: ToastrService, private router: Router) {
+  constructor(private fB: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private activityService: ActivityService, private toaster: ToastrService, private router: Router) {
+    this.activatedRoute.data.subscribe((response) => {
+      this.departments = response.departments;
+      this.userAsigness = response.users;
+    })
+
     this.activityTypes$ = activityService.getActivityTypes();
     this.activityForm = fB.group({
       id: [0],
       subject: [],
+      departmentId: [0],
       description: [],
       activityTypeId: [],
-      level: [ActivityLevel.Normal]
-    })
+      level: [ActivityLevel.Normal],
+      assignees: fB.array([])
+    });
    }
 
   ngOnInit(): void {
@@ -76,7 +93,10 @@ export class ActivityCreateComponent implements OnInit {
 
   save() {
     let newActivity = Object.assign({}, this.activityForm.value);
-
+    newActivity.assignees = this.userAsigness.filter(
+      (x) => x.isSelected == true
+    );
+    console.log(newActivity);
     this.activityService.Create(newActivity).subscribe(x => {
       this.toaster.success("New Activity Created.");
       this.router.navigate(['home/activities']);
@@ -84,5 +104,4 @@ export class ActivityCreateComponent implements OnInit {
       this.toaster.error('Something went wrong saving.')
     });
   }
-
 }

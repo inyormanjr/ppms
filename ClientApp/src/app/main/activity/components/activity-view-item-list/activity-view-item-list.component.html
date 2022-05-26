@@ -19,14 +19,14 @@
         <ng-container *ngIf="activities.length > 0; else elseTemplate2">
           <li *ngFor="let item of activities" class="list-group-item item-detail d-flex justify-content-between align-items-start" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  (click)="viewSelectedActivity(item)">
             <div class="ms-2 me-auto" class="text-truncate d-inline-block" style="max-width: 80%">
-              <div class="" > <h5>[{{item.subject}}] {{item.description}}</h5>
+              <div class="" > <h5>[{{item.departmentName}}][{{item.subject}}] {{item.description}}</h5>
               <div class="text-muted text-small">
-                Created <span class="fw-bold text-success">{{item.typeName}}</span> by {{item.createdByName}} at {{item.createdAt | date:"medium"}}
+                Created <span class="fw-bold text-success">{{item.typeName}}</span> Activity by {{item.createdByName}} at {{item.createdAt | date:"medium"}}
 
               </div>
               </div>
             </div>
-            <span class="badge  rounded-pill p-2" [ngClass]="[levelColorIdentifier(item.level)]"><span class="fw-bold">{{levelIdentifier(item.level)}}</span></span>
+            <span class="badge   fw-bold p-2 text-underline" [ngClass]="[levelColorIdentifier(item.level)]"><span class="fw-bold">{{levelIdentifier(item.level)}}</span></span>
           </li>
         </ng-container>
         <ng-template #elseTemplate2>
@@ -48,12 +48,12 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <div  class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header w-100 d-flex flex-row justify-content-between">
-          <h5 class="modal-title" id="staticBackdropLabel">[{{currentSelected?.subject}}] <span class="badge  rounded-pill p-2" [ngClass]="[levelColorIdentifier(currentSelected?.level)]"><span
+          <h5 class="modal-title" id="staticBackdropLabel">[{{currentSelected?.departmentName}}][{{currentSelected?.subject}}] <span class="badge  rounded-pill p-2" [ngClass]="[levelColorIdentifier(currentSelected?.level)]"><span
               class="fw-bold">{{levelIdentifier(currentSelected?.level)}}</span></span></h5>
 
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -67,30 +67,57 @@
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="container-fluid">
-                  <div class="row mt-2 bg-light p-3" style="min-height: 450px;">
+                  <div class="row mt-2 bg-light p-2 pt-3 pb-3" style="min-height: 450px;">
                     <div class="col-md-12 d-flex flex-column ">
                       <pre style="font-size: 18px;" class="text-wrap">{{currentSelected?.description}}</pre>
                     <div class="bottom-info  mt-auto">
                         <div class="text-muted text-small  mb-1">
-                          <span class="fw-bold text-success">{{currentSelected?.typeName}}</span> Created by
-                          {{currentSelected?.createdByName}} at {{currentSelected?.createdAt |
+                          Type <span class="fw-bold text-success">{{currentSelected?.typeName}}</span> Created by
+                          <strong>{{currentSelected?.createdByName}}</strong> at {{currentSelected?.createdAt |
                           date:"medium"}}
                         </div>
-                        <div class="text-muted text-small  mt-auto mb-2">
-                          Assigned to <i class="fw-1">jryap20@gmail.com</i>
+                        <div *ngIf="currentSelected?.assignees?.length" class="text-muted text-small  mt-auto mb-2">
+                          Assigned to <i class="fw-1" *ngFor="let assignee of currentSelected?.assignees as assignees; let indexCount = index;">
+                            {{assignee.assigneeUserName}}
+                            <span *ngIf="indexCount != assignees.length - 1">,</span>
+                          </i>
                         </div>
                     </div>
 
                     </div>
                   </div>
-                  <div class="row mt-2">
-                  <div class="col-md-12 g-0">
-                    <textarea class="form-control " placeholder="Comment" name="" id="" cols="30" rows="5"></textarea>
+                  <div class="row mt-2" style="max-height: 450px; overflow-y: auto;">
+                    <ng-container *ngIf="currentComments.length > 0; else elseNoComment">
+                      <div  class="comment p-2 pt-3 ps-4 pe-4 bg-light d-flex flex-column col-md-12 mb-1 " style="min-height: 100px; border-radius: 20px;" *ngFor="let comment of currentComments; let i=index">
+                        <div class="commentor  d-flex flex-row justify-content-between align-items-center">
+                          <strong><span class="">
+                            <ng-container *ngIf="currentUser == comment.commentorUserName; else elseTemplate2">
+                                You({{comment.commentorUserName}})
+                            </ng-container>
+                            <ng-template #elseTemplate2>
+                            {{comment.commentorUserName}}
+                            </ng-template>
+
+                          </span></strong>
+                          <i class="">{{comment.createdAt | date:'short'}}</i>
+                        </div>
+                        <pre class="mt-1">{{comment.comment}}</pre>
+                      </div>
+                    </ng-container>
+                    <ng-template #elseNoComment>
+
+                    </ng-template>
+
                   </div>
+                  <div class="row pt-2">
+                      <div class="col-md-12 g-0">
+                        <textarea  class="form-control" style="border-radius: 20px;" [(ngModel)]="newComment" placeholder="Write comment..." name="" id="" cols="4"
+                          rows="5"></textarea>
+                      </div>
                   </div>
                   <div class="row pt-2">
                     <div class="col-md-12 g-0 d-flex justify-content-end">
-                      <button type="button" class="btn btn-outline-success">Add Comment</button>
+                   <button type="button" class="btn btn-outline-success" (click)="createComment(currentSelected?.id)">Add Comment</button>
                     </div>
 
                   </div>

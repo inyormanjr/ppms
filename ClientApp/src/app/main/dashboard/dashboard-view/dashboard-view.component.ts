@@ -17,10 +17,11 @@ export class DashboardViewComponent implements OnInit {
   incomingEskey$: Observable<EskeyReceivable[]>;
   receivedEskeys$: Observable<EskeyReceivable[]>;
   constructor(private store: Store<DashboardState>) {
-     this.store.dispatch(DashboardActions.fetchActivities());
+    this.store.dispatch(DashboardActions.loadActivitys());
     this.store.dispatch(DashboardActions.fetchEskeyReceivable());
     this.store.dispatch(DashboardActions.fetchEskeyReceived());
-     this.activityList$ = this.store.select(
+
+    this.activityList$ = this.store.select(
        DashboardSelector.selectActivities
      );
     this.incomingEskey$ = this.store.select(

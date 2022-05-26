@@ -14,19 +14,24 @@ import { noop } from 'rxjs';
 
 @Injectable()
 export class DashboardEffects {
-
-  fetchActivities$ = createEffect(
-    () => this.actions$.pipe(
-      ofType(DashboardActions.fetchActivities),
-      tap((action) => {
-        this.activityService.Get()
-          .pipe(map((data: Activity[]) => {
-             this.store.dispatch(
-               DashboardActions.fetchActivitiesSuccess({ data })
-             );
-        })).subscribe(noop, (error) => console.log(error))
-      })
-    ), {dispatch: false}
+  fetchActivityList$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(DashboardActions.loadActivitys),
+        tap((action) => {
+          this.activityService
+            .Get()
+            .pipe(
+              map((data: Activity[]) => {
+                this.store.dispatch(
+                  DashboardActions.loadActivitysSuccess({ data })
+                );
+              })
+            )
+            .subscribe(noop, (error) => {});
+        })
+      ),
+    { dispatch: false }
   );
 
   fetchEskeyReceivable$ = createEffect(

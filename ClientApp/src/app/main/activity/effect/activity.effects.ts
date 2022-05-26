@@ -20,6 +20,7 @@ export class ActivityEffects {
         ofType(ActivityActionType.loadActivitys),
         tap((action) => {
           this.activityService.Get().pipe(map((data: Activity[]) => {
+          
             this.store.dispatch(ActivityActionType.loadActivitysSuccess({ data }));
           })).subscribe(noop, (error) => {})
         })

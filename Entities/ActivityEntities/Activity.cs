@@ -16,7 +16,8 @@ namespace PMS.Entities.ActivityEntities
         public int CreatedById { get; set; }
         public AppUser? CreatedBy { get; set; }
         public ActivityLevel Level { get; set; } = ActivityLevel.Normal;
-        public List<ActivityAssignee>? Assignees { get; set; } = new List<ActivityAssignee>();
+        public List<ActivityAssignee> Assignees { get; set; }
+        public List<ActivityComment> Comments { get; set; }
 
     }
 }

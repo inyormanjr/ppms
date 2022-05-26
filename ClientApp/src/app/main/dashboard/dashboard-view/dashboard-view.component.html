@@ -14,12 +14,19 @@
                 <div class="card-body">
                   <h5 class="card-title">Recent Activities</h5>
                   <div class="list-container" style="min-height: 420px; max-height:420px; overflow: auto;" >
-                  <ul class="list-group">
-                  <li *ngFor="let item of activityList$ | async" class="list-group-item d-flex justify-content-between">
-                    <span class="text-truncate" style="max-width: 70%;">(<b>{{item.subject}}</b>) {{item.description}}</span>
-                    <span class="text-muted">{{item.createdAt | date:"medium"}}</span>
-                  </li>
-                   </ul>
+                    <ng-container *ngIf="activityList$ | async as activities; else elseTemplate">
+                        <ul class="list-group">
+                          <li *ngFor="let item of activities" class="list-group-item d-flex justify-content-between">
+                            <span class="text-truncate" style="max-width: 70%;">(<b>{{item.subject}}</b>) {{item.description}}</span>
+                            <span class="text-muted">{{item.createdAt | date:"medium"}}</span>
+                          </li>
+                        </ul>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+
+                    </ng-template>
+
+
                   </div>
                 </div>
                 <div class="card-footer">

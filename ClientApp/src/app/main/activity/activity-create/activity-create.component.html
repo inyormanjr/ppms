@@ -20,8 +20,8 @@
   <div class="row">
     <div class="mb-4 col-md-6">
       <label for="exampleFormControlTextarea1" class="form-label">Department</label>
-      <select class="form-select" aria-label="Default select example" formControlName="activityTypeId">
-        <option *ngFor="let type of activityTypes$ | async" [ngValue]="type.id">{{type.typeName}}
+      <select class="form-select" aria-label="Default select example" formControlName="departmentId">
+        <option *ngFor="let department of departments" [ngValue]="department.id">{{department.departmentName}}
         </option>
       </select>
     </div>
@@ -34,7 +34,8 @@
 
       <div class="col-md-12 mb-3">
         <label for="">Assignee</label>
-        <a href="" class="ms-2 text-success"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+        <a href="" class="ms-2 text-success"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
             fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
             <path
@@ -44,14 +45,7 @@
       </div>
       <div class="col-md-12">
         <div class="assignee-list w-100 bg-white mb-3 p-2" style="min-height: 40px;">
-          <i class="badge text-decoration-none bg-primary m-2 p-2">jryap20@gmail.com
-            <a href="#" class="btn-close ms-2 text-white " aria-label="Close"></a></i>
-          <i class="badge text-decoration-none bg-primary m-2 p-2">jryap20@gmail.com
-            <a href="#" class="btn-close ms-2 text-white " aria-label="Close"></a></i>
-          <i class="badge text-decoration-none bg-primary m-2 p-2">jryap20@gmail.com
-            <a href="#" class="btn-close ms-2 text-white " aria-label="Close"></a></i>
-          <i class="badge text-decoration-none bg-primary m-2 p-2">jryap20@gmail.com
-            <a href="#" class="btn-close ms-2 text-white " aria-label="Close"></a></i>
+               <span class="badge bg-secondary p-2 m-1" *ngFor="let item of userAsigness | userSelected">{{item.assigneeUserName}}</span>
         </div>
       </div>
 
@@ -84,3 +78,33 @@
   </div>
 </div>
 </form>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">User List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control mb-2" id="user-filter" [(ngModel)]="searchUserModel" placeholder="search user">
+         <ul class="list-group">
+           <li class="list-group-item d-flex flex-row justify-content-between" *ngFor="let user of userAsigness | filterBy: ['assigneeUserName']: searchUserModel;">
+             <div>{{user.assigneeUserName}}</div>
+             <span>
+               <div class="form-check">
+                 <input class="form-check-input" type="checkbox" [(ngModel)]="user.isSelected" id="flexCheckChecked"  [checked]="user.isSelected">
+               </div>
+             </span>
+            </li>
+         </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

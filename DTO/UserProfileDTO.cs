@@ -13,5 +13,6 @@ namespace PMS.DTO
         public string Address { get; set; } = string.Empty;
         public string Contact { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
+        public Boolean IsSelected { get; set; } = false;
     }
 }
