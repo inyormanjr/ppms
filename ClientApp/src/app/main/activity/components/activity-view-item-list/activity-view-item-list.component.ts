@@ -87,7 +87,7 @@ export class ActivityViewItemListComponent implements OnInit {
           comment: x.comment,
           createdAt: x.createdAt,
         };
-        this.currentComments.push(newActivtyComment);
+        this.currentComments.unshift(newActivtyComment);
       });
     }
   }

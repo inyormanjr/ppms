@@ -81,7 +81,7 @@ namespace PMS.Controllers
         [Authorize]
         public async Task<ActionResult<List<ActivityCommentDTO>>> GetCommentByActivityId(int activityId)
         {
-            var result = await __context.ActivityComment.Include(x=> x.Commentor).Where(x => x.ActivityId == activityId).ToListAsync();
+            var result = await __context.ActivityComment.Include(x=> x.Commentor).OrderByDescending(x=> x.Id).Where(x => x.ActivityId == activityId).ToListAsync();
             var mapped = _mapper.Map<List<ActivityCommentDTO>>(result);
             return mapped;
 
