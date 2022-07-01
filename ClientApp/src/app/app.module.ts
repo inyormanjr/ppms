@@ -1,3 +1,4 @@
+import { AuthGuard } from './_guards/auth.guard';
 import { AuthInterceptor } from './_interceptor/auth.interceptor';
 import { ErrorInterceptor } from './_interceptor/error.interceptor';
 import { appReducer, appRootKey } from './reducers/index';
@@ -57,6 +58,7 @@ export function tokenGetter() {
         path: 'home',
         loadChildren: () =>
           import('./main/main.module').then((x) => x.MainModule),
+        canActivate: [AuthGuard]
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ]),

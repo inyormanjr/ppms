@@ -32,7 +32,19 @@ export class AcountService {
       );
   }
 
+  checkAuth(): Observable<boolean> {
+    return this.httpClient.get<any>(this.baseURL + 'CheckAuth').pipe(
+      map((x: any) => {
+        console.log(x);
+        if (x === true) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
 
+  }
 
   getToken()  {
      var u = localStorage.getItem('user');

@@ -1,7 +1,3 @@
-
-import { Router } from '@angular/router';
-import { AcountService } from './../../services/account/acount.service';
-import { User } from './../../models/user';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -23,14 +19,13 @@ export class LoginViewComponent implements OnInit {
   constructor(private fb: FormBuilder, private appStore: Store<AppRootState>) {
     this.loginForm = fb.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
   ngOnInit(): void {}
 
 
   login() {
-    console.log('login');
     let loginCred = this.loginForm.value;
     this.appStore.dispatch(AppActions.login({ username: loginCred.username, password: loginCred.password }));
   }

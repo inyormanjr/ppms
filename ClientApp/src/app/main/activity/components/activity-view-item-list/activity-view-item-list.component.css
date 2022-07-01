@@ -2,3 +2,7 @@
   background-color: rgb(247, 245, 245);
   cursor: pointer;
 }
+
+* {
+  font-size: 14px;
+}

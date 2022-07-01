@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PMS.Base;
@@ -59,6 +60,12 @@ namespace PMS.Controllers
                 Token = tokenService.CreateToken(user),
                 Role = user.Role.ToString()
             }; ;
+        }
+
+        [HttpGet("CheckAuth")]
+        [Authorize]
+        public async Task<ActionResult<bool>> CheckAuthenticated() {
+            return await Task.Run<bool>((() => true));
         }
 
         private async Task<bool> UserExist(string username) {

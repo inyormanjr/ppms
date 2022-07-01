@@ -2,8 +2,10 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PMS.Data;
 using PMS.DTO;
 using PMS.Entities;
+using PMS.Entities.ActivityEntities;
 using PMS.Entities.EskeysEntities;
 using PMS.interfaces;
 using System.Security.Claims;
@@ -15,14 +17,17 @@ namespace PMS.Controllers
         private readonly IEskeyReceivableService _eskeyReceivableService;
         private readonly IMapper _mapper;
         private readonly ITokenService tokenService;
+        private readonly PMSDbContext dbContext;
         private readonly IAccountService _accountService;
 
         public EskeysController(IEskeyReceivableService eskeyReceivableService, IMapper mapper, ITokenService tokenService,
+        PMSDbContext dbContext,
         IAccountService accountService)
         {
             this._accountService = accountService;
             this._mapper = mapper;
             this.tokenService = tokenService;
+            this.dbContext = dbContext;
             this._eskeyReceivableService = eskeyReceivableService;
         }
 
@@ -69,6 +74,18 @@ namespace PMS.Controllers
             var userId = this.User.Claims.FirstOrDefault().Value;
             mapped.OperatorId = int.Parse(userId.ToString());
             var result = await this._eskeyReceivableService.Add(mapped);
+            var newActivity = new Activity() { 
+                Subject = result.location + " Eskeys",
+                DepartmentId = 1,
+                Description = "Eskey Delivery from " + result.location + " created",
+                ActivityTypeId = 4,
+                CreatedAt = DateTime.Now,
+                CreatedById = int.Parse(userId.ToString()),
+                Level = ActivityLevel.Important,
+
+            };
+            await dbContext.Activity.AddAsync(newActivity);
+            await dbContext.SaveChangesAsync();
             return _mapper.Map<EskeyReceivableCreateDTO>(result);
         }
 

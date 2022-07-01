@@ -9,7 +9,7 @@
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
     <div class="container-fluid">
       <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+            <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
               <div class="card h-100" >
                 <div class="card-body">
                   <h5 class="card-title">Recent Activities</h5>
@@ -18,7 +18,7 @@
                         <ul class="list-group">
                           <li *ngFor="let item of activities" class="list-group-item d-flex justify-content-between">
                             <span class="text-truncate" style="max-width: 70%;">(<b>{{item.subject}}</b>) {{item.description}}</span>
-                            <span class="text-muted">{{item.createdAt | date:"medium"}}</span>
+                            <span class="text-muted text-small">{{item.createdAt | date:"medium"}}</span>
                           </li>
                         </ul>
                     </ng-container>
@@ -34,18 +34,20 @@
                 </div>
               </div>
             </div>
-      </div>
-      <div class="row">
-          <div class="col-md-6 col-lg-6 col-sm-12 mb-1">
-            <app-eskeys-received-table-card *ngIf="receivedEskeys$ | async as receivedEskeys"  [receivedEskeys]="receivedEskeys">
 
-            </app-eskeys-received-table-card>
-          </div>
-          <div class="col-md-6 col-lg-6 col-sm-12 mb-1">
-            <app-eskeys-incoming-table-card *ngIf="incomingEskey$ | async as incomingEskeys"  [incomingEskeys]="incomingEskeys"></app-eskeys-incoming-table-card>
-          </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+                  <div class="mb-1">
+                    <app-eskeys-received-table-card *ngIf="receivedEskeys$ | async as receivedEskeys" [receivedEskeys]="receivedEskeys">
 
+                    </app-eskeys-received-table-card>
+                  </div>
+                  <div class=" mb-1">
+                    <app-eskeys-incoming-table-card *ngIf="incomingEskey$ | async as incomingEskeys" [incomingEskeys]="incomingEskeys">
+                    </app-eskeys-incoming-table-card>
+                  </div>
+            </div>
       </div>
+
     </div>
 
   </div>
