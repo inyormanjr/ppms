@@ -1,18 +1,18 @@
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Recent Activity</button>
+    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Overview</button>
     <!-- <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button> -->
     <!-- <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button> -->
   </div>
 </nav>
 <div class="tab-content pt-5 pb-3" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-    <div class="container-fluid">
+    <div class="container-fluid ">
       <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
-              <div class="card h-100" >
+              <div class="card border-0 h-100" >
                 <div class="card-body">
-                  <h5 class="card-title">Recent Activities</h5>
+                  <h5 class="card-title">Activities</h5>
                   <div class="list-container" style="min-height: 420px; max-height:420px; overflow: auto;" >
                     <ng-container *ngIf="activityList$ | async as activities; else elseTemplate">
                         <ul class="list-group">
@@ -28,9 +28,6 @@
 
 
                   </div>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted"></small>
                 </div>
               </div>
             </div>
