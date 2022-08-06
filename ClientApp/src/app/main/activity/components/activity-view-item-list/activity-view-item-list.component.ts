@@ -59,6 +59,19 @@ export class ActivityViewItemListComponent implements OnInit {
     }
   }
 
+  borderColorByLevelIdentifier(level?: number) {
+    switch (level) {
+      case 0:
+        return 'border-left-normal';
+      case 1:
+        return 'border-left-important';
+      case 2:
+        return 'border-left-urgent';
+      default:
+        return 'border-left-normal';
+    }
+  }
+
   getCommentsByActivityId(id?: number) {
     if (id) {
       return this.activityService.getComments(id).pipe();

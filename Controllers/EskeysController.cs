@@ -74,16 +74,7 @@ namespace PMS.Controllers
             var userId = this.User.Claims.FirstOrDefault().Value;
             mapped.OperatorId = int.Parse(userId.ToString());
             var result = await this._eskeyReceivableService.Add(mapped);
-            var newActivity = new Activity() { 
-                Subject = result.location + " Eskeys",
-                DepartmentId = 1,
-                Description = "Eskey Delivery from " + result.location + " created",
-                ActivityTypeId = 4,
-                CreatedAt = DateTime.Now,
-                CreatedById = int.Parse(userId.ToString()),
-                Level = ActivityLevel.Important,
-
-            };
+            var newActivity = new Activity().NewEskeyActivity(result.location, userId);
             await dbContext.Activity.AddAsync(newActivity);
             await dbContext.SaveChangesAsync();
             return _mapper.Map<EskeyReceivableCreateDTO>(result);

@@ -6,3 +6,16 @@
 * {
   font-size: 14px;
 }
+
+li#activity-item.border-left-normal {
+  border-left: 3px solid grey !important;
+}
+
+li#activity-item.border-left-important {
+  border-left: 3px solid orange !important;
+}
+
+li#activity-item.border-left-urgent {
+  border-left: 3px solid red !important;
+}
+

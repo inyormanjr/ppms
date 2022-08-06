@@ -8,6 +8,7 @@ import { EskeysIncomingTableCardComponent } from './components/eskeys-incoming-t
 import { dashboardReducer } from './reducer/dashboard.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { DashboardEffects } from './reducer/dashboard.effects';
+import { ProblemRecordsComponent } from './components/problem-records/problem-records.component';
 
 
 const routes: Routes = [{path: '', component: DashboardViewComponent}];
@@ -16,6 +17,7 @@ const routes: Routes = [{path: '', component: DashboardViewComponent}];
     DashboardViewComponent,
     EskeysReceivedTableCardComponent,
     EskeysIncomingTableCardComponent,
+    ProblemRecordsComponent,
   ],
   imports: [
     CommonModule,

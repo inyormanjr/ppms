@@ -17,7 +17,8 @@
     </li>
     <ng-container *ngIf="(activityList$ | async) as activities; else elseTemplate">
         <ng-container *ngIf="activities.length > 0; else elseTemplate2">
-          <li *ngFor="let item of activities" class="list-group-item item-detail d-flex justify-content-between align-items-start" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  (click)="viewSelectedActivity(item)">
+          <li *ngFor="let item of activities" id="activity-item" [ngClass]="[borderColorByLevelIdentifier(item.level)]"
+          class="list-group-item item-detail  d-flex justify-content-between align-items-start" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  (click)="viewSelectedActivity(item)">
             <div class="ms-2 me-auto" class="text-truncate d-inline-block" style="max-width: 80%">
               <div class="" > <h5>[{{item.departmentName}}][{{item.subject}}] {{item.description}}</h5>
               <div class="text-muted text-small">

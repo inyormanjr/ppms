@@ -19,5 +19,18 @@ namespace PMS.Entities.ActivityEntities
         public List<ActivityAssignee> Assignees { get; set; }
         public List<ActivityComment> Comments { get; set; }
 
+        public Activity NewEskeyActivity(string location, string userId) {
+            return new Activity
+            {
+                Subject = location + " Eskeys",
+                DepartmentId = 1,
+                Description = "Eskey Delivery from " + location + " created",
+                ActivityTypeId = 4,
+                CreatedAt = DateTime.Now,
+                CreatedById = int.Parse(userId),
+                Level = ActivityLevel.Important,
+            };
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using PMS.Entities;
 using PMS.Entities.ActivityEntities;
 using PMS.Entities.DepartmentEntities;
 using PMS.Entities.EskeysEntities;
+using PMS.Entities.ProblemEntities;
 using PMS.FluentApiMapping;
 
 namespace PMS.Data
@@ -20,6 +21,7 @@ namespace PMS.Data
         public DbSet<Department> Department { get; set; }
         public DbSet<ActivityAssignee> ActivityAssignee { get; set; }
         public DbSet<ActivityComment> ActivityComment { get; set; }
+        public DbSet<Problem> Problem { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
